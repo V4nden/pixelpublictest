@@ -8,7 +8,7 @@ import { Router } from "next/router";
 import { redirect } from "next/dist/server/api-utils";
 import { useRouter } from "next/navigation";
 import Image from "next/image";
-import { useSession } from "next-auth/react";
+import { signIn, useSession } from "next-auth/react";
 import { toast } from "react-toastify";
 
 type Props = {};
@@ -45,6 +45,9 @@ const TicketPlayPage = (props: Props) => {
           return;
         } else if (resb.error == "promo") {
           toast("Такого промокода несуществует", { type: "error" });
+          return;
+        } else if (resb.error == "unauthorized") {
+          signIn("discord");
           return;
         } else {
           router.push("/error/unauthorized/");
