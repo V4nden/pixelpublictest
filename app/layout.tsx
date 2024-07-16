@@ -1,8 +1,13 @@
 import type { Metadata } from "next";
-import { Inter } from "next/font/google";
+import { Inter, Roboto } from "next/font/google";
 import "./globals.css";
+import NavBar from "@/src/shared/ui/NavBar/NavBar";
+import { SessionProvider } from "next-auth/react";
+import SSRSessionProvider from "@/src/shared/SSRSessionProvider";
+import { ToastContainer } from "react-toastify";
+import ToastProvider from "@/src/shared/ui/Toasts/ToastProvider";
 
-const inter = Inter({ subsets: ["latin"] });
+const inter = Roboto({ subsets: ["cyrillic"], weight: "300" });
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -16,7 +21,14 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={inter.className}>{children}</body>
+      <body className={inter.className}>
+        <SSRSessionProvider>
+          <ToastProvider>
+            <NavBar />
+            {children}
+          </ToastProvider>
+        </SSRSessionProvider>
+      </body>
     </html>
   );
 }
