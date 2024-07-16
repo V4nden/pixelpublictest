@@ -20,9 +20,9 @@ const NavBar = (props: Props) => {
 
   return (
     <nav
-      className={`fixed top-0 left-0 duration-1000 z-10 p-4 md:px-32 sm:p-4 lg:px-64 place-items-center transition-all grid grid-cols-2 w-full ${
-        scroll > 0 && "bg-background/75"
-      } backdrop-blur-sm`}
+      className={`fixed top-0 left-0 duration-1000 z-10 p-4 md:px-32 sm:p-4 lg:px-64 place-items-center transition-all grid grid-cols-2 w-full border-b border-backgroundprimary border-opacity-0 ${
+        scroll > 30 && "bg-background/50 border-opacity-100 backdrop-blur-sm"
+      } `}
     >
       <Link href={"/"} className="flex gap-2 items-center place-self-start">
         <h1 className="font-bold text-2xl">Pixel</h1>

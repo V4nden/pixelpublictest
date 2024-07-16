@@ -28,6 +28,10 @@ const TicketPlayPage = (props: Props) => {
   }, [session]);
   //@ts-ignore
   const submit = (data) => {
+    if (session.status == "unauthenticated") {
+      signIn("discord");
+      return;
+    }
     toast("Заявка в обработке", { type: "info" });
     fetch("/api/ticket", {
       method: "POST",
