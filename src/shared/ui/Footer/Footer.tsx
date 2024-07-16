@@ -24,16 +24,28 @@ const Footer = (props: Props) => {
       </div>
 
       <div className="flex items-center gap-4 text-xl text-[#fff]">
-        <Link href={""} className="bg-[#24A1DE] rounded-xl p-2">
+        <Link
+          href={"https://t.me/pixelvanilla"}
+          className="bg-[#24A1DE] rounded-xl p-2"
+        >
           <FaTelegramPlane />
         </Link>
-        <Link href={""} className="bg-[#7289da] rounded-xl p-2">
+        <Link
+          href={"https://discord.gg/mdUqm9dKbE"}
+          className="bg-[#7289da] rounded-xl p-2"
+        >
           <FaDiscord />
         </Link>
-        <Link href={""} className="bg-[#f00] rounded-xl p-2">
+        <Link
+          href={"https://www.youtube.com/channel/UCDxpxE7YG5dz1e2VZoekDow"}
+          className="bg-[#f00] rounded-xl p-2"
+        >
           <FaYoutube />
         </Link>
-        <Link href={""} className="bg-[#0077FF] rounded-xl p-2">
+        <Link
+          href={"https://vk.com/pixelvanilla"}
+          className="bg-[#0077FF] rounded-xl p-2"
+        >
           <FaVk />
         </Link>
       </div>
