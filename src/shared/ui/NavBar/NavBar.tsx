@@ -3,6 +3,8 @@ import { signIn, signOut, useSession } from "next-auth/react";
 import Image from "next/image";
 import Link from "next/link";
 import React, { useEffect, useState } from "react";
+import { FaHome, FaNewspaper } from "react-icons/fa";
+import { FaNoteSticky, FaPeopleGroup, FaWebflow } from "react-icons/fa6";
 
 type Props = {};
 
@@ -20,21 +22,30 @@ const NavBar = (props: Props) => {
 
   return (
     <nav
-      className={`fixed top-0 left-0 duration-1000 z-10 p-4 md:px-32 sm:p-4 lg:px-64 place-items-center transition-all grid grid-cols-2 w-full border-b border-backgroundprimary border-opacity-0 ${
+      className={`fixed top-0 left-0 duration-1000 z-10 p-4 md:px-32 sm:p-4 lg:px-64 place-items-center transition-all grid grid-cols-3 w-full border-b border-backgroundprimary border-opacity-0 ${
         scroll > 30 && "bg-background/50 border-opacity-100 backdrop-blur-sm"
       } `}
     >
       <Link href={"/"} className="flex gap-2 items-center place-self-start">
         <h1 className="font-bold text-2xl">Pixel</h1>
-        <p className="font-semibold bg-accent rounded-full px-2 text-sm">
+        <p className="font-semibold bg-accent rounded-full px-2 text-sm sm:hidden md:block">
           Beta
         </p>
       </Link>
-      {/* <div className="text-sm flex gap-6 font-semibold justify-center">
-        <Link href={"/"}>Главная</Link>
-        <Link href={"/dev"}>Новости</Link>
-        <Link href={"/dev"}>Игроки</Link>
-      </div> */}
+      <div className="md:text-sm sm:text-base flex gap-6 font-semibold justify-center">
+        <Link href={"/"} className="flex gap-2 items-center">
+          <FaHome /> <p className="sm:hidden lg:block">Главная</p>
+        </Link>
+        <Link href={"/rules"} className="flex gap-2 items-center">
+          <FaNoteSticky /> <p className="sm:hidden lg:block">Правила</p>
+        </Link>
+        <Link href={"/dev"} className="flex gap-2 items-center text-text/50">
+          <FaNewspaper /> <p className="sm:hidden lg:block">Новости</p>
+        </Link>
+        <Link href={"/dev"} className="flex gap-2 items-center text-text/50">
+          <FaPeopleGroup /> <p className="sm:hidden lg:block">Игроки</p>
+        </Link>
+      </div>
       <div className="place-self-end">
         {session.data ? (
           <button
@@ -43,7 +54,7 @@ const NavBar = (props: Props) => {
             }}
             className="flex items-center gap-2"
           >
-            <span className="font-bold text-text/85">
+            <span className="font-bold text-text/85 sm:hidden md:block">
               {session.data.user?.name}
             </span>
             <Image
