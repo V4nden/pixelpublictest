@@ -24,7 +24,7 @@ const HomePage = (props: Props) => {
         />
         <div className="w-full min-h-screen absolute top-0 left-0 bg-gradient-to-t from-background via-background/0 to-background/25" />
       </div>
-      <div className="min-h-screen relative flex flex-col sm:text-center md:text-left justify-center sm:w-full md:w-[60%] ">
+      <div className="min-h-screen relative flex flex-col sm:text-center md:text-left justify-center sm:w-full md:w-[60%]">
         {/* <div className="flex flex-col gap-4 bg-background/25 backdrop-blur-sm p-8 rounded-xl">
           <h1 className="font-bold text-3xl">Лучший ванильный сервер</h1>
           <div className="font-semibold text-text/85">
@@ -67,9 +67,11 @@ const HomePage = (props: Props) => {
         <p className="text-stone-300">
           Pixel - ванильный майнкрафт сервер. Это место для того, чтобы найти
           новых друзей и провести время с удовольствием! Наша цель - создание
-          доступного и удобного пространства для взаимодействия игроков. Мы не
-          изменяем механики игры, все установленные плагины лишь упрощают или
-          дополняют процесс взаимодействия между людьми.
+          доступного и удобного пространства для взаимодействия игроков.
+        </p>
+        <p className="text-stone-300 mt-2">
+          Мы не изменяем механики игры, все установленные плагины лишь упрощают
+          или дополняют процесс взаимодействия между людьми.
         </p>
         <div className="text-stone-300 sm:flex-col flex md:flex-row justify-around gap-4 py-8 text-center">
           <Link

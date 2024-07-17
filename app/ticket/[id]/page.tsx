@@ -30,6 +30,12 @@ const Page = async (props: Props) => {
       </div>
       <div className="flex flex-col justify-center items-center gap-4">
         <h1 className="font-bold text-3xl">Заявка {ticket.user.nickname}</h1>
+        {promo && (
+          <div className="flex items-center gap-2 ">
+            <p>Активирован промокод</p>
+            <span className="text-primary font-bold text-xl">{promo.code}</span>
+          </div>
+        )}
         <div className="gap-2 grid grid-cols-5">
           {ticket.phrase.split(" ").map((el: string, index: number) => {
             return (
@@ -42,14 +48,22 @@ const Page = async (props: Props) => {
             );
           })}
         </div>
-        {promo && (
-          <div className="flex items-center gap-2 ">
-            <p>Активирован промокод</p>
-            <span className="text-primary font-bold text-xl">{promo.code}</span>
+
+        <p>К оплате: {promo ? 100 - promo.discount : 100}₽</p>
+        {promo && 100 - promo.discount == 0 ? (
+          <div className="text-sm">
+            Ваша заявка в обработке. <br /> Вам придёт сообщение в ЛС дискорда с
+            данными для игры.
           </div>
+        ) : (
+          <>
+            <div className="text-sm">
+              Ваша заявка в обработке. <br /> Вам придёт сообщение в ЛС дискорда
+              с данными для игры.
+              <PlayTicketCopyAndRedirect code={ticket.phrase} />
+            </div>
+          </>
         )}
-        <p>К оплате: {promo ? (100 / 100) * promo.discount : 100}₽</p>
-        <PlayTicketCopyAndRedirect code={ticket.phrase} />
       </div>
     </main>
   ) : (
