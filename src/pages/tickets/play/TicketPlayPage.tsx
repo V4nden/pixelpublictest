@@ -51,6 +51,12 @@ const TicketPlayPage = (props: Props) => {
         } else if (resb.error == "promo") {
           toast("Такого промокода несуществует", { type: "error" });
           return;
+        } else if (resb.error == "discord") {
+          toast(
+            "Ваша заявка уже рассмотренна. Проверьте ЛС с ботом в дискорде",
+            { type: "error" }
+          );
+          return;
         } else if (resb.error == "unauthorized") {
           signIn("discord");
           return;

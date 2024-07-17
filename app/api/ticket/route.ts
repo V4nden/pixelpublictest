@@ -14,14 +14,24 @@ export async function POST(req: Request) {
   const session = await getServerSession();
   if (session && session.user && session.user.image) {
     const reqb = await req.json();
-    const player = await pb.collection("players").getFullList({
-      filter: 'name~"' + reqb.nickname + '"',
+    const player = await pb.collection("whitelist").getFullList({
+      filter: 'nickname~"' + reqb.nickname + '"',
+      $autoCancel: false,
+      headers: { key: String(process.env.POCKETBASE_KEY) },
+    });
+    const discord = await pb.collection("whitelist").getFullList({
+      filter: 'discord~"' + reqb.id + '"',
       $autoCancel: false,
       headers: { key: String(process.env.POCKETBASE_KEY) },
     });
     if (player.length) {
       return Response.json({
         error: "name",
+      });
+    }
+    if (discord.length) {
+      return Response.json({
+        error: "discord",
       });
     }
     if (reqb.promo) {
