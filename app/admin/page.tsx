@@ -10,8 +10,8 @@ const Admin = async (props: Props) => {
     sort: "-created",
   });
   return (
-    <main className="flex min-h-screen flex-col justify-center items-center md:px-32 sm:px-4 lg:px-32">
-      <div className="absolute left-0 top-0 w-full h-screen flex justify-center">
+    <main className="flex min-h-screen flex-col justify-center items-center md:p-32 sm:p-4 lg:p-32">
+      <div className="absolute left-0 top-0 w-full h-screen flex justify-center -z-10">
         <Image
           src="/sc.png"
           width={1920}
@@ -82,5 +82,5 @@ const Admin = async (props: Props) => {
     </main>
   );
 };
-
+export const revalidate = 1;
 export default Admin;

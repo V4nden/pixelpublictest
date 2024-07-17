@@ -5,3 +5,55 @@
 body {
   @apply bg-background text-text;
 }
+
+.markdown {
+  @apply flex flex-col gap-4 text-base text-text/85;
+}
+
+.markdown > h1 {
+  @apply text-2xl font-semibold;
+}
+
+.markdown > h2 {
+  @apply text-xl font-semibold;
+}
+
+.markdown > p {
+  @apply py-2;
+}
+.markdown em {
+  @apply text-text/75 text-sm py-2;
+}
+
+.markdown > ol,
+ul {
+  @apply py-2;
+  list-style-type: disc;
+  list-style-position: inside;
+}
+.markdown > ol > li,
+.markdown > ul > li {
+  @apply py-1;
+}
+
+.markdown > hr {
+  border-color: rgba(245, 222, 179, 0.295);
+}
+
+@keyframes rotating {
+  0% {
+    rotate: 0deg;
+  }
+  99% {
+    rotate: 360deg;
+  }
+}
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;
+}
+
+/* For IE, Edge and Firefox */
+.scrollbar-hide {
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none; /* Firefox */
+}
