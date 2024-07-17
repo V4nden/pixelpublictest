@@ -78,7 +78,7 @@ const HomePage = (props: Props) => {
             href={"/ticket"}
             className="bg-background/25 backdrop-blur-sm rounded-xl w-full p-2 "
           >
-            Играть
+            Оставить заявку
           </Link>
           <Link
             href={"https://discord.gg/6uf5ZStHP5"}
