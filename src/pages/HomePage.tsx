@@ -79,7 +79,7 @@ const HomePage = (props: Props) => {
             Играть
           </Link>
           <Link
-            href={"https://discord.gg/vJZDpGjbpu"}
+            href={"https://discord.gg/6uf5ZStHP5"}
             className="bg-background/25 backdrop-blur-sm rounded-xl w-full p-2 "
           >
             Discord

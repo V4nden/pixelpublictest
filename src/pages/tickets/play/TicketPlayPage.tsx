@@ -10,6 +10,7 @@ import { useRouter } from "next/navigation";
 import Image from "next/image";
 import { signIn, useSession } from "next-auth/react";
 import { toast } from "react-toastify";
+import Link from "next/link";
 
 type Props = {};
 
@@ -173,7 +174,7 @@ const TicketPlayPage = (props: Props) => {
             )}
             <input
               type="submit"
-              className="bg-accent font-bold shadow-md rounded-full p-2"
+              className="bg-accent font-bold shadow-md rounded-full p-2 transition-all hover:scale-[101%] active:scale-95"
               value="Оставить заявку"
             />
           </form>
@@ -200,6 +201,12 @@ const TicketPlayPage = (props: Props) => {
                 После подачи заявки не выходите из нашего дискорд севрера, иначе
                 вы можете потерять средства без возможности возврата
               </p>
+              <Link
+                href={"https://discord.gg/6uf5ZStHP5"}
+                className="text-sm text-text/50"
+              >
+                Discord (кликабельно)
+              </Link>
             </div>
           </div>
         </div>
