@@ -57,7 +57,7 @@ const Page = async (props: Props) => {
           </div>
         ) : (
           <>
-            <div className="text-sm">
+            <div className="text-sm flex flex-col items-center justify-center">
               Ваша заявка в обработке. <br /> Вам придёт сообщение в ЛС дискорда
               с данными для игры.
               <PlayTicketCopyAndRedirect code={ticket.phrase} />
