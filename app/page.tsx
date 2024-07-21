@@ -6,6 +6,7 @@ import Link from "next/link";
 export default async function Home() {
   const players = await pb.collection("players").getFullList({
     headers: { key: String(process.env.POCKETBASE_KEY) },
+    $autoCancel: false,
   });
   return (
     <main className="flex min-h-screen flex-col sm:px-4 md:px-32 lg:px-64">
