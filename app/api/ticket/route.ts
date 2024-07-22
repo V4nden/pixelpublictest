@@ -56,17 +56,46 @@ export async function POST(req: Request) {
     } ${words[Math.floor(Math.random() * words.length)]} ${
       words[Math.floor(Math.random() * words.length)]
     } ${words[Math.floor(Math.random() * words.length)]}`;
-    const id = await createTicketPlay({
+    await createTicketPlay({
       phrase: key,
       promo: reqb.promo,
       user: {
         ...reqb,
       },
     });
+
+    const ticket = (await getTicketPlayByDiscord(reqb.id))[0];
+
+    // webhook
+    if (process.env.DISCORD_WEBHOOK) {
+      const data = {
+        content: `## Новая заявка
+### Phrase
+${ticket.phrase}
+### User
+${ticket.user}
+### Promo
+${ticket.promo}
+## Ticket id
+${ticket.id}
+`,
+        username: "TicketAnnouncement",
+        avatar_url:
+          "https://cdn.discordapp.com/avatars/837341994962911313/867883fd8a0c25656c67adac2eb8be55.webp?size=32",
+      };
+      fetch(process.env.DISCORD_WEBHOOK, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(data),
+      }).then(async (res) => {
+        console.log(res.status);
+      });
+    }
+
     return Response.json({
       key: key,
       error: false,
-      id: (await getTicketPlayByDiscord(reqb.id))[0].id,
+      id: ticket.id,
     });
   } else {
     return Response.json({ error: "unauthorized" });

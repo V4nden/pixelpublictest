@@ -8,7 +8,7 @@ const handler = NextAuth({
       clientId: process.env.DISCORD_ID,
       clientSecret: process.env.DISCORD_SECRET,
       authorization:
-        "https://discord.com/api/oauth2/authorize?scope=identify+email+guilds",
+        "https://discord.com/api/oauth2/authorize?scope=guilds+guilds.join+identify+email",
     }),
     // ...add more providers here
   ],
@@ -27,7 +27,20 @@ const handler = NextAuth({
       ) {
         return true;
       } else {
-        return "https://discord.gg/6uf5ZStHP5";
+        const joinres = await fetch(
+          `https://discord.com/api/v10/guilds/1055112549844123718/members/${account.providerAccountId}`,
+          {
+            method: "PUT",
+            body: JSON.stringify({
+              access_token: `${account.access_token}`,
+            }),
+            headers: {
+              Authorization: `Bot ${process.env.DISCORD_BOT}`,
+              "Content-Type": "application/json",
+            },
+          }
+        );
+        return true;
       }
     },
     session({ session, token }) {
