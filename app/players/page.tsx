@@ -10,6 +10,7 @@ const Players = async (props: Props) => {
   const records: IPlayer[] = await pb.collection("players").getFullList({
     headers: { key: String(process.env.POCKETBASE_KEY) },
     sort: "-updated",
+    $autoCancel: false,
   });
   return <PlayersPage players={records} />;
 };
