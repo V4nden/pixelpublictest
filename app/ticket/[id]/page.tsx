@@ -1,4 +1,5 @@
 import { getTicketPlayById, pb } from "@/src/utils/pocketbase";
+import PlayTicketCode from "@/src/widgets/ticket/PlayTicketCode";
 import PlayTicketCopyAndRedirect from "@/src/widgets/ticket/PlayTicketCopyAndRedirect";
 import Image from "next/image";
 import React from "react";
@@ -18,7 +19,7 @@ const Page = async (props: Props) => {
   const promo = ticket.promo ? await promos[0] : null;
   return ticket ? (
     <main className="flex min-h-screen flex-col justify-center items-center sm:px-4 md:px-32 lg:px-64 text-center">
-      <div className="absolute left-0 top-0 w-full h-screen flex justify-center">
+      <div className="absolute left-0 top-0 w-full h-screen flex justify-center -z-10">
         <Image
           src="/sc.png"
           width={1920}
@@ -36,18 +37,7 @@ const Page = async (props: Props) => {
             <span className="text-primary font-bold text-xl">{promo.code}</span>
           </div>
         )}
-        <div className="gap-2 grid grid-cols-5">
-          {ticket.phrase.split(" ").map((el: string, index: number) => {
-            return (
-              <span
-                key={index}
-                className="bg-background/25 backdrop-blur-sm border border-accent p-2 rounded-xl"
-              >
-                {el}
-              </span>
-            );
-          })}
-        </div>
+        <PlayTicketCode phrase={ticket.phrase} />
 
         <p>К оплате: {promo ? 100 - promo.discount : 100}₽</p>
         {promo && 100 - promo.discount == 0 ? (
@@ -57,9 +47,9 @@ const Page = async (props: Props) => {
           </div>
         ) : (
           <>
-            <div className="text-sm flex flex-col items-center justify-center">
-              Ваша заявка в обработке. <br /> Вам придёт сообщение в ЛС дискорда
-              с данными для игры.
+            <div className="text-sm flex flex-col gap-2 items-center justify-center">
+              Ваша заявка в обработке. <br /> Данные для игры придут вам в лс
+              дискорда после рассмотрения заявки
               <PlayTicketCopyAndRedirect code={ticket.phrase} />
             </div>
           </>

@@ -24,12 +24,12 @@ export default async function Home() {
         <h1 className="text-stone-200 py-6 font-bold text-4xl">
           Добро пожаловать на Pixel
         </h1>
-        <p className="text-stone-300">
+        <p className="text-stone-300 text-sm">
           Pixel - ванильный майнкрафт сервер. Это место для того, чтобы найти
           новых друзей и провести время с удовольствием! Наша цель - создание
           доступного и удобного пространства для взаимодействия игроков.
         </p>
-        <p className="text-stone-300 mt-2">
+        <p className="text-stone-300 mt-2 text-sm">
           Мы не изменяем механики игры, все установленные плагины лишь упрощают
           или дополняют процесс взаимодействия между людьми.
         </p>
