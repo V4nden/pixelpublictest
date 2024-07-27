@@ -36,8 +36,8 @@ const NavBar = (props: Props) => {
         <Link href={"/"} className="flex gap-2 items-center">
           <FaHome /> <p className="sm:hidden lg:block">Главная</p>
         </Link>
-        <Link href={"/rules"} className="flex gap-2 items-center">
-          <FaNoteSticky /> <p className="sm:hidden lg:block">Правила</p>
+        <Link href={"/wiki"} className="flex gap-2 items-center">
+          <FaNoteSticky /> <p className="sm:hidden lg:block">Вики</p>
         </Link>
         <Link href={"/dev"} className="flex gap-2 items-center text-text/50">
           <FaNewspaper /> <p className="sm:hidden lg:block">Новости</p>

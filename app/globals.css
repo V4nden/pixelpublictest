@@ -18,11 +18,22 @@ body {
   @apply text-xl font-semibold;
 }
 
+.markdown > p > img {
+  @apply sm:w-full md:w-[400px];
+}
+
+.markdown > h3 {
+  @apply text-lg font-semibold;
+}
+
 .markdown > p {
   @apply py-2;
 }
 .markdown em {
   @apply text-text/75 text-sm py-2;
+}
+.markdown a {
+  @apply p-0.5 px-2 bg-backgroundprimary rounded-xl text-primary;
 }
 
 .markdown > ol,
