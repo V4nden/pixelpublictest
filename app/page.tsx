@@ -9,7 +9,7 @@ export default async function Home() {
     $autoCancel: false,
   });
   return (
-    <main className="flex min-h-screen flex-col sm:px-4 md:px-32 lg:px-64">
+    <main className="flex min-h-screen flex-col">
       <div className="absolute left-0 top-0 w-full h-screen">
         <Image
           width={1920}

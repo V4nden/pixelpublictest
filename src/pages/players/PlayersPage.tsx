@@ -9,7 +9,7 @@ type Props = { players: IPlayer[] };
 const PlayersPage = (props: Props) => {
   const [filter, setFilter] = useState("");
   return (
-    <main className="flex min-h-screen flex-col gap-10 sm:px-4 md:px-32 lg:px-64 py-16">
+    <main className="flex min-h-screen flex-col gap-10 py-16">
       <input
         value={filter}
         onChange={(e) => {

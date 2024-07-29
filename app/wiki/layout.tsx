@@ -16,7 +16,7 @@ export default async function WikiLayout({
   });
   return (
     <>
-      <main className="sm:flex-col md:flex-row flex min-h-screen gap-8 sm:px-4 md:px-32 lg:px-64 py-20">
+      <main className="sm:flex-col md:flex-row flex min-h-screen gap-8 py-20">
         <WikiSidebar records={records} />
         {children}
       </main>

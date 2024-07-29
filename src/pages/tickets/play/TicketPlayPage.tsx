@@ -24,7 +24,6 @@ const TicketPlayPage = (props: Props) => {
   const router = useRouter();
   const session = useSession();
   useEffect(() => {
-    console.log(session);
     return () => {};
   }, [session]);
   //@ts-ignore
@@ -69,7 +68,7 @@ const TicketPlayPage = (props: Props) => {
     });
   };
   return (
-    <main className="flex min-h-screen flex-col justify-center items-center md:px-32 sm:px-4 lg:px-64">
+    <main className="flex min-h-screen flex-col justify-center items-center">
       <div className="absolute left-0 top-0 w-full h-screen flex justify-center">
         <Image
           src="/sc.png"

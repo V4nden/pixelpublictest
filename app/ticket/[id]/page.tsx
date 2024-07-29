@@ -18,7 +18,7 @@ const Page = async (props: Props) => {
   });
   const promo = ticket.promo ? await promos[0] : null;
   return ticket ? (
-    <main className="flex min-h-screen flex-col justify-center items-center sm:px-4 md:px-32 lg:px-64 text-center">
+    <main className="flex min-h-screen flex-col justify-center items-center text-center">
       <div className="absolute left-0 top-0 w-full h-screen flex justify-center -z-10">
         <Image
           src="/sc.png"

@@ -24,7 +24,7 @@ const Popup = (props: Props) => {
             initial={{ scale: 1.05 }}
             animate={{ scale: 1 }}
             exit={{ scale: 1.05 }}
-            className="sm:w-10/12 md:w-1/2 min-h-1/2 max-h-screen p-6 bg-background/75 rounded-xl border-accent border relative backdrop-blur-sm flex flex-col gap-2 items-start"
+            className="sm:w-10/12 md:w-2/3 min-h-1/2 max-h-screen p-6 bg-background/75 rounded-xl border-accent border relative backdrop-blur-sm flex flex-col gap-2 items-start overflow-y-scroll"
           >
             <div className="flex justify-between items-center w-full">
               <h1 className="text-2xl font-extrabold">{props.title}</h1>

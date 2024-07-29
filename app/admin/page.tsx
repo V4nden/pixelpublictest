@@ -10,7 +10,7 @@ const Admin = async (props: Props) => {
     sort: "-created",
   });
   return (
-    <main className="flex min-h-screen flex-col justify-center items-center md:p-32 sm:p-4 lg:p-32">
+    <main className="flex min-h-screen flex-col justify-center items-center ">
       <div className="absolute left-0 top-0 w-full h-screen flex justify-center -z-10">
         <Image
           src="/sc.png"

@@ -5,7 +5,7 @@ type Props = {};
 
 const RulesPage = (props: Props) => {
   return (
-    <main className="flex min-h-screen flex-col justify-center items-center py-16 md:px-32 sm:px-4 lg:px-64">
+    <main className="flex min-h-screen flex-col justify-center items-center py-16">
       <h1 className="font-bold text-3xl py-8">Правила сервера</h1>
       <Markdown className={"markdown"}>
         {`# Глава 1
