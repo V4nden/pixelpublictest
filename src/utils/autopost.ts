@@ -47,7 +47,7 @@ export default async function autopost(
     console.log(await res.json());
   });
   await pb
-    .collection("ticketplay")
+    .collection("news")
     .create(
       { title: title, image: image, content: message },
       { headers: { key: String(process.env.POCKETBASE_KEY) } }
