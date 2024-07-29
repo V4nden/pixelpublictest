@@ -1,4 +1,5 @@
 import moment from "moment";
+import { pb } from "./pocketbase";
 export default async function autopost(
   title: string,
   image: string,
@@ -45,4 +46,10 @@ export default async function autopost(
   ).then(async (res) => {
     console.log(await res.json());
   });
+  await pb
+    .collection("ticketplay")
+    .create(
+      { title: title, image: image, content: message },
+      { headers: { key: String(process.env.POCKETBASE_KEY) } }
+    );
 }
