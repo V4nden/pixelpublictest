@@ -22,7 +22,7 @@ export async function POST(req: Request) {
               url: body.image,
             },
             description: `# ${body.title}
-      ${body.message}
+      ${body.content}
     
               ||<@&1055112639245713408>||`,
             color: 14727558, // Decimal color code
@@ -48,7 +48,7 @@ export async function POST(req: Request) {
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({
             chat_id: -1001555804470,
-            caption: `🧡 *${body.title}* \n\n${body.message}`,
+            caption: `🧡 *${body.title}* \n\n${body.content}`,
             photo: body.image,
             parse_mode: "Markdown",
           }),
@@ -57,7 +57,7 @@ export async function POST(req: Request) {
         console.log(await res.json());
       });
       await pb.collection("news").create(
-        { title: body.title, image: body.image, content: body.message },
+        { title: body.title, image: body.image, content: body.content },
         {
           headers: { key: String(process.env.POCKETBASE_KEY) },
           $autoCancel: false,
