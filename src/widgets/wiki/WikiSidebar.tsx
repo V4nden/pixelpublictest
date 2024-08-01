@@ -31,19 +31,14 @@ const WikiSidebar = (props: Props) => {
                         onClick={(e) => {
                           setCurrent(el.article);
                         }}
-                        className={`transition-all ease-out ${
+                        className={`transition-all ease-out p-1 font-semibold px-3 ${
                           current.endsWith(el.article)
-                            ? "text-text"
-                            : "text-text/75"
+                            ? "bg-background/25 backdrop-blur-sm border border-primary/25 rounded-lg text-primary"
+                            : "border border-primary/0 text-text/75"
                         }`}
                         href={el.article}
                       >
                         {el.title}
-                        <div
-                          className={`h-0.5 transition-all bg-primary/50 ${
-                            current.endsWith(el.article) ? "w-full" : "w-0"
-                          }`}
-                        ></div>
                       </Link>
                     );
                   })}
