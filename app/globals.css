@@ -54,6 +54,9 @@ ul {
   border-color: rgba(245, 222, 179, 0.295);
 }
 
+.active {
+  @apply bg-background/25 backdrop-blur-sm border-primary/25 rounded-lg;
+}
 @keyframes rotating {
   0% {
     rotate: 0deg;

@@ -16,7 +16,7 @@ const PlayTicketCode = (props: Props) => {
             return (
               <span
                 key={index}
-                className="bg-background/25 backdrop-blur-sm border border-accent p-2 rounded-xl"
+                className="bg-background/25 backdrop-blur-sm border border-primary/25 p-2 rounded-lg"
               >
                 {el}
               </span>
@@ -27,7 +27,7 @@ const PlayTicketCode = (props: Props) => {
           onClick={() => [setPopup(true)]}
           className="text-sm text-text/50"
         >
-          Что за слова?
+          Подробнее
         </button>
       </div>
 
@@ -41,6 +41,32 @@ const PlayTicketCode = (props: Props) => {
 После подачи заявки, вставьте фразу в комментарий к донату`}
         </Markdown>
         <Image src={"/d.png"} width={1920} height={1080} alt="Donatuin" />
+        <Markdown className={"markdown text-left"}>
+          {`**Что если я не могу использовать DonationAlerts?**
+
+Вы можете оплатить заявку на наш [DontePay](https://new.donatepay.ru/@pixelmc)
+
+## Что дальше?
+После оплаты и рассмотрения вашей заявки вам придёт сообщение в дискорд от нашего бота с данными для игры 
+`}
+        </Markdown>
+        <Image
+          src={"/ds.png"}
+          width={1920}
+          height={1080}
+          alt="Discord message"
+        />
+        <Markdown className={"markdown text-left"}>
+          {`# Внимание!
+          
+Убедитесь, что вы принимаете сообщения в личные сообщения дискорда от сторонних приложений, также удостоверьтесь, что вы находитесь и не вышли с дискорд сервера до рассмотрения заявки. В ином случае, мы не сможем оповестить вас о рассмотрении вашей заявки
+
+В силу особенностей авторизации и игрового процесса мы не сможем рассмотреть вашу заявку если вы вышли с нашего дискорда. 
+
+# Ещё вопросы?
+
+Вы всегда можете задать вопрос / уточнить детали у администрации в [телеграме](https://t.me/connectsomnoi) для уточнения деталий покупки проходки и процедуры принятия вашей заявки`}
+        </Markdown>
       </Popup>
     </>
   );

@@ -12,7 +12,7 @@ type Props = {};
 
 const Footer = (props: Props) => {
   return (
-    <footer className="text-sm text-text/60 py-8 border-t border-backgroundprimary">
+    <footer className="text-sm text-text/60 py-8 border-t bg-background/25 border-primary/25 backdrop-blur-sm">
       <div className="m-auto sm:w-[95%] md:w-[75%] lg:w-[65%] max-w-[1600px] flex sm:flex-col md:flex-row justify-between">
         <div>
           <p>

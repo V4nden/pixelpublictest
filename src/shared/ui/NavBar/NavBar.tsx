@@ -22,8 +22,8 @@ const NavBar = (props: Props) => {
 
   return (
     <nav
-      className={`fixed top-0 left-0 duration-1000 z-10 py-4 place-items-center transition-all w-full border-b border-backgroundprimary border-opacity-0 ${
-        scroll > 30 && "bg-background/50 border-opacity-100 backdrop-blur-sm"
+      className={`fixed top-0 left-0 duration-1000 z-10 py-4 place-items-center transition-all w-full border-b border-primary/0 ${
+        scroll > 30 && "bg-background/25 border-primary/25 backdrop-blur-sm"
       } `}
     >
       <div className="m-auto sm:w-[95%] md:w-[75%] lg:w-[65%] grid grid-cols-3 max-w-[1600px]">

@@ -33,7 +33,7 @@ const WikiSidebar = (props: Props) => {
                         }}
                         className={`transition-all ease-out p-1 font-semibold px-3 ${
                           current.endsWith(el.article)
-                            ? "bg-background/25 backdrop-blur-sm border border-primary/25 rounded-lg text-primary"
+                            ? "active text-primary"
                             : "border border-primary/0 text-text/75"
                         }`}
                         href={el.article}
