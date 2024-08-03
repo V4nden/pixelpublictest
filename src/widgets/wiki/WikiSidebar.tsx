@@ -31,10 +31,10 @@ const WikiSidebar = (props: Props) => {
                         onClick={(e) => {
                           setCurrent(el.article);
                         }}
-                        className={`transition-all ease-out p-1 font-semibold px-3 ${
+                        className={`transition-all ease-out p-1 font-semibold border px-3 ${
                           current.endsWith(el.article)
                             ? "active text-primary"
-                            : "border border-primary/0 text-text/75"
+                            : "border-primary/0 text-text/75"
                         }`}
                         href={el.article}
                       >

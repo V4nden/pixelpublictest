@@ -29,6 +29,9 @@ main {
 .markdown > h3 {
   @apply text-lg font-semibold;
 }
+.markdown > blockquote {
+  @apply px-4 border active font-bold text-text/75;
+}
 
 .markdown > p {
   @apply py-2;
