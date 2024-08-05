@@ -38,6 +38,5 @@ const NewsPage = (props: Props) => {
     </main>
   );
 };
-export const revalidate = 1;
 
 export default NewsPage;
