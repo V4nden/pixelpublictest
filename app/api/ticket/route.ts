@@ -1,8 +1,6 @@
-import {
-  createTicketPlay,
-  getTicketPlayByDiscord,
-  pb,
-} from "@/src/utils/pocketbase";
+import { pb } from "@/src/app/pocketbase";
+import { createTicketPlay } from "@/src/entities/Ticket/api/createTicketPlay";
+import { getTicketPlayByDiscord } from "@/src/entities/Ticket/api/getTicketPlayByDiscord";
 import fs from "fs/promises";
 import { getServerSession } from "next-auth";
 export async function POST(req: Request) {

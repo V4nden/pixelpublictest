@@ -1,8 +1,4 @@
-import {
-  createTicketPlay,
-  getTicketPlayByDiscord,
-  pb,
-} from "@/src/utils/pocketbase";
+import { pb } from "@/src/app/pocketbase";
 import fs from "fs/promises";
 import moment from "moment";
 import { getServerSession } from "next-auth";

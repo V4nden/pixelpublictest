@@ -6,6 +6,5 @@ type Props = {};
 const News = (props: Props) => {
   return <NewsPage />;
 };
-export const revalidate = 1;
-
 export default News;
+export const dynamic = "force-dynamic";
