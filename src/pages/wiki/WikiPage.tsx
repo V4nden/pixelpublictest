@@ -1,25 +1,26 @@
-import { pb } from "@/src/app/pocketbase";
-import { getWikiArticles } from "@/src/entities/Wiki/api/getWikiArticles";
+import { getWikiArticlesByTitle } from "@/src/entities/Wiki/api/getWikiArticlesByTitle";
+import { IWikiArticle } from "@/src/entities/Wiki/model/types";
 import WikiNotFound from "@/src/entities/Wiki/ui/WikiNotFound";
 import React from "react";
 import Markdown from "react-markdown";
 
-type Props = { params: { article: string } };
+type Props = { article?: IWikiArticle };
 
-const WikiPage = async (props: Props) => {
-  const [record] = await getWikiArticles(props.params.article);
-  return record ? (
+const WikiPage = ({ article }: Props) => {
+  if (!article) return;
+
+  return (
     <div className="flex flex-col gap-4">
       <div className="py-8 bg-background/25 backdrop-blur-sm border border-primary/25 rounded-xl text-center">
         <div className="flex items-center justify-center">
           <div className="h-0.5 w-full bg-text/25" />
           <h1 className="text-3xl font-extrabold text-text px-8 whitespace-nowrap">
-            {record.title}
+            {article.title}
           </h1>
           <div className="h-0.5 w-full bg-text/25" />
         </div>
         <div className="flex gap-2 flex-wrap justify-center">
-          {record.content.split("\n").map((el: string, index: number) => {
+          {article.content.split("\n").map((el: string, index: number) => {
             if (el.startsWith("# "))
               return (
                 <span
@@ -32,10 +33,8 @@ const WikiPage = async (props: Props) => {
           })}
         </div>
       </div>
-      <Markdown className={"markdown"}>{record.content}</Markdown>
+      <Markdown className={"markdown"}>{article.content}</Markdown>
     </div>
-  ) : (
-    <WikiNotFound />
   );
 };
 
