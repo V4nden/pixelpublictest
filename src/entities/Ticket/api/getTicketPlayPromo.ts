@@ -1,7 +1,9 @@
 import { pb } from "@/src/app/pocketbase";
-import { ITicketPlay } from "../model/types";
+import { ITicketPlay, ITicketPlayPromo } from "../model/types";
 
-export async function getTicketPlayPromo(ticket: ITicketPlay) {
+export async function getTicketPlayPromos(
+  ticket: ITicketPlay
+): Promise<ITicketPlayPromo[]> {
   return await pb.collection("promos").getFullList({
     filter: 'code="' + ticket.promo + '"',
     $autoCancel: false,

@@ -1,11 +1,11 @@
 "use client";
-import { IPlayer } from "@/src/utils/types";
 import { motion } from "framer-motion";
 import Image from "next/image";
 import React from "react";
 import CountUp from "react-countup";
 import { FaClock, FaPlus, FaSkull, FaUser } from "react-icons/fa";
 import { FaHand } from "react-icons/fa6";
+import { IPlayer } from "../model/types";
 
 type Props = { player: IPlayer };
 

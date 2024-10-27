@@ -1,9 +1,9 @@
 "use client";
-import { IWikiArticle } from "@/src/utils/types";
 import Link from "next/link";
 import React, { useEffect, useLayoutEffect, useState } from "react";
+import { IWikiArticle } from "../model/types";
 
-type Props = { records: IWikiArticle[] };
+type Props = { articles: IWikiArticle[] };
 
 const WikiSidebar = (props: Props) => {
   const [current, setCurrent] = useState("about");
@@ -13,7 +13,7 @@ const WikiSidebar = (props: Props) => {
 
   return (
     <aside className="sm:text-center md:text-left flex flex-col gap-4 md:sticky sm:relative md:top-20 h-fit">
-      {props.records
+      {props.articles
         .reduce<string[]>((acc, el) => {
           return acc.includes(el.category) ? [...acc] : [...acc, el.category];
         }, [])
@@ -22,7 +22,7 @@ const WikiSidebar = (props: Props) => {
             <div key={index}>
               <h1 className="font-extrabold text-xl pb-2">{el}</h1>
               <div className="pl-2 flex gap-2 md:flex-col flex-wrap justify-center">
-                {props.records
+                {props.articles
                   .filter((el1) => el1.category == el)
                   .map((el, index2) => {
                     return (
