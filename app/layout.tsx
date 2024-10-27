@@ -1,12 +1,12 @@
 import type { Metadata } from "next";
 import { Inter, Roboto } from "next/font/google";
 import "./globals.css";
-import NavBar from "@/src/shared/ui/NavBar/NavBar";
+import NavBar from "@/src/widgets/NavBar/ui/NavBar";
 import { SessionProvider } from "next-auth/react";
 import SSRSessionProvider from "@/src/shared/SSRSessionProvider";
 import { ToastContainer } from "react-toastify";
 import ToastProvider from "@/src/shared/ui/Toasts/ToastProvider";
-import Footer from "@/src/shared/ui/Footer/Footer";
+import Footer from "@/src/widgets/Footer/ui/Footer";
 
 const inter = Roboto({ subsets: ["cyrillic"], weight: "400" });
 

@@ -1,4 +1,4 @@
-import { pb } from "@/src/utils/pocketbase";
+import { pb } from "@/src/app/pocketbase";
 import Image from "next/image";
 import React from "react";
 

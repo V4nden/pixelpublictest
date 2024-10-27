@@ -1,7 +1,7 @@
 import VignettedImage from "@/src/shared/VignettedImage";
-import { pb } from "@/src/utils/pocketbase";
+import { pb } from "@/src/app/pocketbase";
 import { IWikiArticle } from "@/src/utils/types";
-import WikiSidebar from "@/src/widgets/wiki/WikiSidebar";
+import WikiSidebar from "@/src/entities/Wiki/ui/WikiSidebar";
 import { getServerSession } from "next-auth";
 import Link from "next/link";
 

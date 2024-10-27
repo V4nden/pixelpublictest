@@ -6,9 +6,7 @@ import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import Markdown from "react-markdown";
 
-type Props = {};
-
-const NewsPage = (props: Props) => {
+const NewsPage = () => {
   const {
     register,
     handleSubmit,

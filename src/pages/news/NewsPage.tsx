@@ -1,6 +1,6 @@
 "use client";
+import { INewsPost } from "@/src/entities/News/model/types";
 import VignettedImage from "@/src/shared/VignettedImage";
-import { INewsPost } from "@/src/utils/types";
 import moment from "moment";
 import Image from "next/image";
 import React, { useEffect, useState } from "react";
@@ -9,6 +9,7 @@ import Markdown from "react-markdown";
 type Props = {};
 
 const NewsPage = (props: Props) => {
+  //TODO: USEFETCH HOOK
   const [data, setData] = useState<INewsPost[] | null>(null);
   useEffect(() => {
     fetch("/api/posts/news").then(async (data) => {
