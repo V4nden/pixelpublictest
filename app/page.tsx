@@ -1,4 +1,4 @@
-import { pb } from "@/src/utils/pocketbase";
+import { pb } from "@/src/app/pocketbase";
 import HomePageStatsWidget from "@/src/widgets/HomePageStatsWidget";
 import Image from "next/image";
 import Link from "next/link";

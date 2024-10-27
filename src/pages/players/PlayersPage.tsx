@@ -1,6 +1,6 @@
 "use client";
-import Player from "@/src/shared/Player/Player";
-import { IPlayer } from "@/src/utils/types";
+import { IPlayer } from "@/src/entities/Player/model/types";
+import Player from "@/src/entities/Player/ui/Player";
 import { motion } from "framer-motion";
 import React, { useState } from "react";
 

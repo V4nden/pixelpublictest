@@ -2,7 +2,7 @@ import {
   createTicketPlay,
   getTicketPlayByDiscord,
   pb,
-} from "@/src/utils/pocketbase";
+} from "@/src/app/pocketbase";
 import fs from "fs/promises";
 import { getServerSession } from "next-auth";
 export async function POST(req: Request) {
