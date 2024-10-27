@@ -3,7 +3,7 @@ import { signIn, signOut, useSession } from "next-auth/react";
 import Image from "next/image";
 import Link from "next/link";
 import React, { useEffect, useState } from "react";
-import { FaHome, FaNewspaper } from "react-icons/fa";
+import { FaHome, FaNewspaper, FaUserTie } from "react-icons/fa";
 import { FaNoteSticky, FaPeopleGroup, FaWebflow } from "react-icons/fa6";
 
 type Props = {};
@@ -43,8 +43,14 @@ const NavBar = (props: Props) => {
           <Link href={"/news"} className="flex gap-2 items-center">
             <FaNewspaper /> <p className="sm:hidden lg:block">Новости</p>
           </Link>
-          <Link href={"/dev"} className="flex gap-2 items-center text-text/50">
+          {/* <Link href={"/dev"} className="flex gap-2 items-center text-text/50">
             <FaPeopleGroup /> <p className="sm:hidden lg:block">Игроки</p>
+          </Link> */}
+          <Link
+            href={"https://t.me/connectsomnoi"}
+            className="flex gap-2 items-center"
+          >
+            <FaUserTie /> <p className="sm:hidden lg:block">Поддержка</p>
           </Link>
         </div>
         <div className="place-self-end">
