@@ -1,4 +1,6 @@
 "use client";
+import PlayerNav from "@/src/entities/Player/ui/PlayerNav";
+import PlayerNavSkeleton from "@/src/entities/Player/ui/PlayerNav.skeleton";
 import { signIn, signOut, useSession } from "next-auth/react";
 import Image from "next/image";
 import Link from "next/link";
@@ -54,30 +56,10 @@ const NavBar = (props: Props) => {
           </Link>
         </div>
         <div className="place-self-end">
-          {session.data ? (
-            <button
-              onClick={() => {
-                signOut();
-              }}
-              className="flex items-center gap-2"
-            >
-              <span className="font-bold text-text/85 sm:hidden md:block">
-                {session.data.user?.name}
-              </span>
-              <Image
-                width={1920}
-                height={1080}
-                src={
-                  session.data.user
-                    ? session.data.user.image
-                      ? session.data.user.image
-                      : ""
-                    : ""
-                }
-                alt=""
-                className="w-8 h-8 rounded-full"
-              />
-            </button>
+          {session.status == "loading" ? (
+            <PlayerNavSkeleton />
+          ) : session.status == "authenticated" ? (
+            <PlayerNav session={session.data} />
           ) : (
             <button
               onClick={() => {

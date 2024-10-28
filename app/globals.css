@@ -68,6 +68,27 @@ ul {
     rotate: 360deg;
   }
 }
+
+@keyframes skeleton-animation {
+  0% {
+    background-position-x: -400px;
+  }
+  100% {
+    background-position-x: 400px;
+  }
+}
+
+.skeleton {
+  background: linear-gradient(
+    to right,
+    #3f2f1f33 8%,
+    #3f2f1faa 18%,
+    #3f2f1f33 33%
+  );
+  background-size: 400%;
+  animation: skeleton-animation 2s infinite ease-out;
+}
+
 .scrollbar-hide::-webkit-scrollbar {
   display: none;
 }
