@@ -3,7 +3,7 @@ import { Inter, Roboto } from "next/font/google";
 import "./globals.css";
 import NavBar from "@/src/widgets/NavBar/ui/NavBar";
 import { SessionProvider } from "next-auth/react";
-import SSRSessionProvider from "@/src/shared/SSRSessionProvider";
+import AuthProvider from "@/src/app/auth/AuthProvider";
 import { ToastContainer } from "react-toastify";
 import ToastProvider from "@/src/shared/ui/Toasts/ToastProvider";
 import Footer from "@/src/widgets/Footer/ui/Footer";
@@ -26,13 +26,13 @@ export default function RootLayout({
         <link rel="icon" href="/favicon.ico" sizes="any" />
       </head>
       <body className={inter.className}>
-        <SSRSessionProvider>
+        <AuthProvider>
           <ToastProvider>
             <NavBar />
             {children}
             <Footer />
           </ToastProvider>
-        </SSRSessionProvider>
+        </AuthProvider>
       </body>
     </html>
   );

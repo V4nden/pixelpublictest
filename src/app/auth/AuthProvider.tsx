@@ -5,8 +5,8 @@ import React from "react";
 
 type Props = { children: React.ReactNode };
 
-const SSRSessionProvider = (props: Props) => {
+const AuthProvider = (props: Props) => {
   return <SessionProvider>{props.children}</SessionProvider>;
 };
 
-export default SSRSessionProvider;
+export default AuthProvider;
