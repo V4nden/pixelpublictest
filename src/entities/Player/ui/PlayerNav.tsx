@@ -13,45 +13,51 @@ import PlayerNavSkeleton from "./PlayerNav.skeleton";
 type Props = { session: Session };
 
 const PlayerNav = ({ session }: Props) => {
-  const [player, setPlayer] = useState<IPlayer | null>(null);
+  const player: IPlayer | undefined = session.user.player;
 
-  const fetchPlayer = async () => {
-    //@ts-ignore
-    setPlayer(await (await fetch("/api/player?did=" + session.id)).json());
-  };
-
-  useEffect(() => {
-    fetchPlayer();
-  }, []);
-
-  if (!player) return <PlayerNavSkeleton />;
+  if (!session) return <PlayerNavSkeleton />;
 
   return (
-    <div className="flex items-center gap-2 relative group/navplayer cursor-pointer">
-      <Image
-        alt="player head"
-        width={24}
-        height={24}
-        src={`https://starlightskins.lunareclipse.studio/render/pixel/${
-          player.skin != "null" ? player.name : "Steve"
-        }/face${
-          player.skin != "null"
-            ? `?skinUrl=${player.skin}`
-            : `?skinUrl=${"https://s.namemc.com/i/63455d7069b397c2.png"}`
-        }`}
-        className="rounded-md"
-      />
+    <div
+      className={classnames(
+        "flex items-center gap-2 relative group/navplayer cursor-pointer",
+        { "drop-shadow-glow": player && player.plus }
+      )}
+      onClick={() => {
+        signOut();
+      }}
+    >
+      {player ? (
+        <Image
+          alt="player head"
+          width={24}
+          height={24}
+          src={`https://starlightskins.lunareclipse.studio/render/pixel/${
+            player.skin != "null" ? player.name : "Steve"
+          }/face${
+            player.skin != "null"
+              ? `?skinUrl=${player.skin}`
+              : `?skinUrl=${"https://s.namemc.com/i/63455d7069b397c2.png"}`
+          }`}
+          className="rounded-md"
+        />
+      ) : (
+        <Image
+          alt="player head"
+          width={24}
+          height={24}
+          src={session.user.image ?? "user-circle-solid-168.png"}
+          className="rounded-md"
+        />
+      )}
       <span
-        className={classnames("font-black", { "text-accent": player.plus })}
+        className={classnames("font-black", {
+          "text-accent": player && player.plus,
+        })}
       >
-        {player.name}
+        {player ? player.name : session.user.name}
       </span>
-      <button
-        onClick={() => {
-          signOut();
-        }}
-        className="absolute left-[70%] top-1/2 -translate-y-1/2 transition-all ease-out opacity-0 -z-1 group-hover/navplayer:left-[110%] group-hover/navplayer:opacity-100 text-primary group-active/navplayer:text-accent"
-      >
+      <button className="absolute left-[30%] top-1/2 -translate-y-1/2 p-2 transition-all ease-out opacity-0 -z-1 group-hover/navplayer:left-[100%] group-hover/navplayer:opacity-100 text-primary group-active/navplayer:text-accent">
         <MdOutlineLogout />
       </button>
     </div>
