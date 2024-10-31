@@ -8,7 +8,7 @@ import { ToastContainer } from "react-toastify";
 import ToastProvider from "@/src/shared/ui/Toasts/ToastProvider";
 import Footer from "@/src/widgets/Footer/ui/Footer";
 
-const inter = Roboto({ subsets: ["cyrillic"], weight: "400" });
+const inter = Inter({ subsets: ["cyrillic"], weight: "400" });
 
 export const metadata: Metadata = {
   title: "Pixel 1.21 (beta)",
