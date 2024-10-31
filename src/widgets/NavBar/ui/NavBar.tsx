@@ -12,8 +12,9 @@ type Props = {};
 
 const NavBar = (props: Props) => {
   const session = useSession();
-  const [scroll, setScroll] = useState(window.scrollY);
+  const [scroll, setScroll] = useState(0);
   useEffect(() => {
+    setScroll(window.scrollY);
     window.addEventListener("scroll", (e) => {
       setScroll(window.scrollY);
     });
