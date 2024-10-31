@@ -3,6 +3,7 @@ import { IMessage } from "@/src/entities/Thread/model/types";
 import Attachment from "@/src/shared/ui/Attachment/Attachment";
 import moment from "moment";
 import React from "react";
+import Markdown from "react-markdown";
 
 type Props = { message: IMessage };
 
@@ -27,7 +28,7 @@ const ThreadMessage = ({ message }: Props) => {
           ))}
         </div>
       )}
-      {message.content}
+      <Markdown className={"markdown"}>{message.content}</Markdown>
     </div>
   );
 };

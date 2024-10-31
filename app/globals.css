@@ -33,9 +33,6 @@ main {
   @apply px-4 border active font-bold text-text/75;
 }
 
-.markdown > p {
-  @apply py-2;
-}
 .markdown em {
   @apply text-text/75 text-sm py-2;
 }
