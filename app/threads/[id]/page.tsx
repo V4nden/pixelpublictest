@@ -34,7 +34,10 @@ export async function generateMetadata(
       title: "Ошибка",
     };
 
-  const thread = await cachedGetThreadById(params.id);
+  const thread = await cachedGetThreadById(params.id, [
+    IThreadExpandable.RECENT_MESSAGE,
+    IThreadExpandable.ALLOWED,
+  ]);
   if (!thread)
     return {
       title: "Ошибка",
@@ -42,8 +45,8 @@ export async function generateMetadata(
 
   return {
     title: "Pixel - Ветка - " + thread.name,
-    description: thread.recentMessage
-      ? thread.recentMessage.content
+    description: thread.expand?.recentMessage
+      ? thread.expand?.recentMessage.content
       : "Ветка создана",
   };
 }
@@ -55,6 +58,7 @@ const Thread = async ({ params }: Props) => {
   if (!session) return redirect("/api/auth/signin", RedirectType.replace);
 
   const thread = await cachedGetThreadById(params.id, [
+    IThreadExpandable.RECENT_MESSAGE,
     IThreadExpandable.ALLOWED,
   ]);
   if (!thread) return redirect("/not-found", RedirectType.replace);

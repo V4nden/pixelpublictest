@@ -18,7 +18,7 @@ export default async function createMessage(
     .collection("threads")
     .update(
       threadId,
-      { recentMessage: messageRequest, "participants+": [message.authorId] },
+      { recentMessage: messageRequest.id, "participants+": [message.authorId] },
       { headers: { key: String(process.env.POCKETBASE_KEY) } }
     );
 
