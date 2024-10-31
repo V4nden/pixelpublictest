@@ -71,10 +71,16 @@ ul {
 
 @keyframes skeleton-animation {
   0% {
-    background-position-x: -400px;
+    background-position-x: -1000px;
+    opacity: 100%;
+  }
+  50% {
+    background-position-x: 1000px;
+    opacity: 50%;
   }
   100% {
-    background-position-x: 400px;
+    background-position-x: 1000px;
+    opacity: 100%;
   }
 }
 
@@ -86,7 +92,7 @@ ul {
     #3f2f1f33 33%
   );
   background-size: 400%;
-  animation: skeleton-animation 2s infinite ease-out;
+  animation: skeleton-animation 1s infinite;
 }
 
 .scrollbar-hide::-webkit-scrollbar {
