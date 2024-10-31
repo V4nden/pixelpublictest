@@ -7,7 +7,7 @@ import AuthProvider from "@/src/app/auth/AuthProvider";
 import { ToastContainer } from "react-toastify";
 import ToastProvider from "@/src/shared/ui/Toasts/ToastProvider";
 import Footer from "@/src/widgets/Footer/ui/Footer";
-
+import localFont from "next/font/local";
 const inter = Inter({ subsets: ["cyrillic"], weight: "400" });
 
 export const metadata: Metadata = {
