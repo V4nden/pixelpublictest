@@ -26,7 +26,7 @@ export interface IThread extends IPBDefault {
 
 export enum IThreadExpandable {
   CREATOR = "creator",
-  ALLOWED = "allowrd",
+  ALLOWED = "allowed",
   PARTICIPANTS = "participants",
 }
 

@@ -6,10 +6,47 @@ import {
   IThreadExpandable,
 } from "@/src/entities/Thread/model/types";
 import ThreadPage from "@/src/pages/thread/ThreadPage";
-import { getServerSession } from "next-auth";
+import { Metadata, ResolvingMetadata } from "next";
+import { getServerSession, NextAuthOptions } from "next-auth";
 import { RedirectType, redirect } from "next/navigation";
+import { cache } from "react";
 
 type Props = { params: { id: string } };
+
+const cachedGetThreadById = cache(
+  async (id: string, expand?: IThreadExpandable[]) => {
+    return getThreadById(id, expand);
+  }
+);
+
+export async function generateMetadata(
+  { params }: Props,
+  parent: ResolvingMetadata
+): Promise<Metadata> {
+  if (!params || params.id.length != 15)
+    return {
+      title: "Ошибка",
+    };
+
+  const session = await getServerSession(nextAuthOptions);
+  if (!session)
+    return {
+      title: "Ошибка",
+    };
+
+  const thread = await cachedGetThreadById(params.id);
+  if (!thread)
+    return {
+      title: "Ошибка",
+    };
+
+  return {
+    title: "Pixel - Ветка - " + thread.name,
+    description: thread.recentMessage
+      ? thread.recentMessage.content
+      : "Ветка создана",
+  };
+}
 
 const Thread = async ({ params }: Props) => {
   if (!params || params.id.length != 15) return <div>syms</div>;
@@ -17,7 +54,9 @@ const Thread = async ({ params }: Props) => {
   const session = await getServerSession(nextAuthOptions);
   if (!session) return redirect("/api/auth/signin", RedirectType.replace);
 
-  const thread = await getThreadById(params.id, [IThreadExpandable.ALLOWED]);
+  const thread = await cachedGetThreadById(params.id, [
+    IThreadExpandable.ALLOWED,
+  ]);
   if (!thread) return redirect("/not-found", RedirectType.replace);
 
   if (
