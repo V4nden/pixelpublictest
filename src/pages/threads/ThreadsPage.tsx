@@ -3,11 +3,12 @@ import { IThread } from "@/src/entities/Thread/model/types";
 import dateISOToNormal from "@/src/shared/utils/dateISOtoNormal";
 import ThreadMessage from "@/src/widgets/ThreadMessage/ThreadMessage";
 import Link from "next/link";
-import Markdown from "react-markdown";
 
 type Props = { threads: IThread[] };
 
 const ThreadsPage = ({ threads }: Props) => {
+  if (!threads) return null;
+
   const getRecentMessageAuthor = (thread: IThread) => {
     return thread.expand?.participants.find(
       (player) => player.id == thread.expand?.recentMessage.author
