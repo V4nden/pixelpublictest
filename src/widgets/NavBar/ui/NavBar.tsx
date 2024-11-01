@@ -1,12 +1,25 @@
 "use client";
 import PlayerNav from "@/src/entities/Player/ui/PlayerNav";
 import PlayerNavSkeleton from "@/src/entities/Player/ui/PlayerNav.skeleton";
+import NavBarNestedItem from "@/src/features/NavBarNestedItem/NavBarNestedItem";
 import { signIn, signOut, useSession } from "next-auth/react";
 import Image from "next/image";
 import Link from "next/link";
 import React, { useEffect, useState } from "react";
-import { FaHome, FaNewspaper, FaUserTie } from "react-icons/fa";
-import { FaNoteSticky, FaPeopleGroup, FaWebflow } from "react-icons/fa6";
+import {
+  FaCodeBranch,
+  FaHome,
+  FaNewspaper,
+  FaPage4,
+  FaTicketAlt,
+  FaUserTie,
+} from "react-icons/fa";
+import {
+  FaNoteSticky,
+  FaPeopleGroup,
+  FaThreads,
+  FaWebflow,
+} from "react-icons/fa6";
 
 type Props = {};
 
@@ -36,27 +49,65 @@ const NavBar = (props: Props) => {
             Beta
           </p>
         </Link>
-        <div className="md:text-sm sm:text-base flex gap-6 font-semibold justify-center">
-          <Link href={"/"} className="flex gap-2 items-center">
+        <div className="md:text-sm sm:text-base flex gap-2 font-semibold justify-center">
+          <Link
+            href={"/"}
+            className="flex gap-2 p-2 items-center justify-start"
+          >
             <FaHome /> <p className="sm:hidden lg:block">Главная</p>
           </Link>
-          <Link href={"/wiki"} className="flex gap-2 items-center">
+          <Link
+            href={"/wiki"}
+            className="flex gap-2 p-2 items-center justify-start"
+          >
             <FaNoteSticky /> <p className="sm:hidden lg:block">Вики</p>
           </Link>
-          <Link href={"/news"} className="flex gap-2 items-center">
+          <Link
+            href={"/news"}
+            className="flex gap-2 p-2 items-center justify-start"
+          >
             <FaNewspaper /> <p className="sm:hidden lg:block">Новости</p>
           </Link>
           {/* <Link href={"/dev"} className="flex gap-2 items-center text-text/50">
             <FaPeopleGroup /> <p className="sm:hidden lg:block">Игроки</p>
           </Link> */}
-          <Link
-            href={"https://t.me/connectsomnoi"}
-            className="flex gap-2 items-center"
-          >
-            <FaUserTie /> <p className="sm:hidden lg:block">Поддержка</p>
-          </Link>
+
+          {session.data?.user.player ? (
+            <div className="flex gap-2 items-center justify-start relative p-2 group/players cursor-pointer">
+              <FaPeopleGroup /> <p className="sm:hidden lg:block">Игрокам</p>
+              <div className="absolute flex flex-col flex-wrap gap-4 invisible opacity-0 group-hover/players:opacity-100 group-hover/players:visible top-full left-1/2 -translate-x-1/2 active border p-4 w-max transition-all">
+                <NavBarNestedItem
+                  to="/threads"
+                  title="Треды"
+                  description="Треды игроков сервера"
+                  icon={FaCodeBranch}
+                />
+                <hr className="border-primary/25" />
+                <NavBarNestedItem
+                  to="/tickets"
+                  title="Тикеты"
+                  description="Взаимодействие с администрацией"
+                  icon={FaTicketAlt}
+                />
+                <hr className="border-primary/25" />
+                <NavBarNestedItem
+                  to="https://t.me/connectsomnoi"
+                  title="Поддержка"
+                  description="По всем вопросам сюда"
+                  icon={FaUserTie}
+                />
+              </div>
+            </div>
+          ) : (
+            <Link
+              href={"https://t.me/connectsomnoi"}
+              className="flex gap-2 items-center"
+            >
+              <FaUserTie /> <p className="sm:hidden lg:block">Поддержка</p>
+            </Link>
+          )}
         </div>
-        <div className="place-self-end">
+        <div className="place-self-end h-full flex items-center">
           {session.status == "loading" ? (
             <PlayerNavSkeleton />
           ) : session.status == "authenticated" ? (
