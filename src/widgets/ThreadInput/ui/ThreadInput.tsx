@@ -59,7 +59,7 @@ const ThreadInput = ({ thread, updateMessages }: Props) => {
   const submitInputRef = useRef<HTMLInputElement>(null);
 
   const submitOnEnter = (e: KeyboardEvent<HTMLTextAreaElement>) => {
-    if (e.key == "Enter" && !e.shiftKey) {
+    if (e.key == "Enter" && e.shiftKey) {
       e.preventDefault();
       submitInputRef.current?.click();
     }
@@ -166,9 +166,9 @@ const ThreadInput = ({ thread, updateMessages }: Props) => {
           </div>
           <div className="text-text/50">
             <span className="active border py-0.5 px-2">Enter</span> для
-            отправки, <br />{" "}
+            переноса строки, <br />{" "}
             <span className="active border py-0.5 px-2">Shift + Enter</span> для
-            переноса строки
+            отправки
           </div>
         </div>
         <input
