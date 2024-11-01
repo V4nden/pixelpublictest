@@ -1,7 +1,7 @@
 import Player from "@/src/entities/Player/ui/Player";
 import { IMessage } from "@/src/entities/Thread/model/types";
 import Attachment from "@/src/shared/ui/Attachment/Attachment";
-import moment from "moment";
+import dateISOToNormal from "@/src/shared/utils/dateISOtoNormal";
 import React from "react";
 import Markdown from "react-markdown";
 
@@ -13,7 +13,7 @@ const ThreadMessage = ({ message }: Props) => {
       <div className="flex items-center gap-2">
         {message.expand?.author && <Player player={message.expand?.author} />}
         <span className="text-xs text-text/50">
-          {moment(message.created).format("HH:mm, DD.MM.yyyy")}
+          {dateISOToNormal(message.created)}
         </span>
       </div>
       {message.attachments && (

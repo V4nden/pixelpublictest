@@ -3,9 +3,9 @@ import { IPlayer } from "../model/types";
 import Image from "next/image";
 import classNames from "classnames";
 
-type Props = { player: IPlayer };
+type Props = { player: IPlayer; noNick?: boolean };
 
-const Player = ({ player }: Props) => {
+const Player = ({ player, noNick }: Props) => {
   return (
     <div className="flex items-center gap-2 relative group/navplayer cursor-pointer">
       <Image
@@ -22,7 +22,10 @@ const Player = ({ player }: Props) => {
         className="rounded-md"
       />
       <span
-        className={classNames("font-black", { "text-accent": player.plus })}
+        className={classNames("font-black", {
+          "text-accent": player.plus,
+          hidden: noNick,
+        })}
       >
         {player.name}
       </span>

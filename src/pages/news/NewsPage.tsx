@@ -1,8 +1,6 @@
 "use client";
 import { INewsPost } from "@/src/entities/News/model/types";
 import VignettedImage from "@/src/shared/VignettedImage";
-import moment from "moment";
-import Image from "next/image";
 import React, { useEffect, useState } from "react";
 import Markdown from "react-markdown";
 
