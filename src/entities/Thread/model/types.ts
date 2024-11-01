@@ -6,6 +6,8 @@ export interface IThread extends IPBDefault {
   creator: string;
   allowed: string[];
   participants: string[];
+  recentMessage: string;
+  private: boolean;
   expand?: {
     creator?: IPlayer;
     allowed?: IPlayer[];
