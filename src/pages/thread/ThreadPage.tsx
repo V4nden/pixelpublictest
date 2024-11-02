@@ -4,14 +4,14 @@ import { IMessage, IThread } from "@/src/entities/Thread/model/types";
 import ThreadHeader from "@/src/widgets/ThreadHeader/ThreadHeader";
 import ThreadInput from "@/src/widgets/ThreadInput/ui/ThreadInput";
 import ThreadMessage from "@/src/widgets/ThreadMessage/ThreadMessage";
-import { useLayoutEffect, useState } from "react";
+import { useEffect, useState } from "react";
 
 type Props = { thread: IThread; messages: IMessage[] };
 
 const ThreadPage = ({ thread, messages }: Props) => {
   const [messagesState, setMessagesState] = useState<IMessage[]>(messages);
 
-  useLayoutEffect(() => {
+  useEffect(() => {
     if (window) window.scrollTo(0, document.body.scrollHeight);
   }, [messagesState]);
 

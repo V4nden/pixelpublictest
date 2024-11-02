@@ -7,9 +7,10 @@ type Props = {
   player: IPlayer;
   noNick?: boolean;
   size?: "normal" | "small" | "large";
+  adaptive?: boolean;
 };
 
-const Player = ({ player, noNick, size = "normal" }: Props) => {
+const Player = ({ player, noNick, size = "normal", adaptive }: Props) => {
   const imageSizes = {
     normal: 24,
     small: 16,
@@ -34,6 +35,7 @@ const Player = ({ player, noNick, size = "normal" }: Props) => {
         className={classNames("font-black", {
           "text-accent": player.plus,
           hidden: noNick,
+          "sm:hidden md:block": adaptive,
         })}
       >
         {player.name}

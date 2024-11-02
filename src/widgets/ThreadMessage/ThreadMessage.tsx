@@ -2,14 +2,20 @@ import Player from "@/src/entities/Player/ui/Player";
 import { IMessage } from "@/src/entities/Thread/model/types";
 import Attachment from "@/src/shared/ui/Attachment/Attachment";
 import dateISOToNormal from "@/src/shared/utils/dateISOtoNormal";
+import classNames from "classnames";
 import React from "react";
 import Markdown from "react-markdown";
 
-type Props = { message: IMessage };
+type Props = { message: IMessage; small?: boolean };
 
-const ThreadMessage = ({ message }: Props) => {
+const ThreadMessage = ({ message, small }: Props) => {
   return (
-    <div className="active p-4 flex flex-col gap-1 border" key={message.id}>
+    <div
+      className={classNames(`active sm:p-2 md:p-4 flex flex-col gap-1`, {
+        "md:border": !small,
+      })}
+      key={message.id}
+    >
       <div className="flex items-center gap-2">
         {message.expand?.author && <Player player={message.expand?.author} />}
         <span className="text-xs text-text/50">
@@ -28,7 +34,9 @@ const ThreadMessage = ({ message }: Props) => {
           ))}
         </div>
       )}
-      <Markdown className={"markdown"}>{message.content}</Markdown>
+      <Markdown className={classNames("markdown", { "text-xs": small })}>
+        {message.content}
+      </Markdown>
     </div>
   );
 };
