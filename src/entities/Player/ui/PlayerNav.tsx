@@ -51,7 +51,7 @@ const PlayerNav = ({ session }: Props) => {
         />
       )}
       <span
-        className={classnames("font-black sm:hidden md:block", {
+        className={classnames("font-black", {
           "text-accent": player && player.plus,
         })}
       >

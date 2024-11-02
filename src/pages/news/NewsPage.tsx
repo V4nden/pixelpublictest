@@ -16,7 +16,7 @@ const NewsPage = (props: Props) => {
   }, []);
 
   return (
-    <main className="flex min-h-screen flex-col gap-4 my-20">
+    <main className="flex min-h-screen flex-col gap-4 py-20">
       <VignettedImage src="/sc.png" className="fixed" />
       {data &&
         data.map((post) => {

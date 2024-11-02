@@ -6,7 +6,7 @@ type Props = { thread: IThread; messages: IMessage[] };
 
 const ThreadHeader = ({ thread, messages }: Props) => {
   return (
-    <div className="flex items-center gap-2 text-text/50">
+    <div className="flex flex-wrap items-center gap-2 text-text/50">
       <h1 className="font-bold text-xl text-primary">{thread.name}</h1>
       <span>
         От {thread.expand?.creator && thread.expand?.creator.name}, сообщений:{" "}
