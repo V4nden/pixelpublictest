@@ -3,15 +3,24 @@ import { IPlayer } from "../model/types";
 import Image from "next/image";
 import classNames from "classnames";
 
-type Props = { player: IPlayer };
+type Props = {
+  player: IPlayer;
+  noNick?: boolean;
+  size?: "normal" | "small" | "large";
+};
 
-const Player = ({ player }: Props) => {
+const Player = ({ player, noNick, size = "normal" }: Props) => {
+  const imageSizes = {
+    normal: 24,
+    small: 16,
+    large: 32,
+  };
   return (
     <div className="flex items-center gap-2 relative group/navplayer cursor-pointer">
       <Image
         alt="player head"
-        width={24}
-        height={24}
+        width={imageSizes[size]}
+        height={imageSizes[size]}
         src={`https://starlightskins.lunareclipse.studio/render/pixel/${
           player.skin != "null" ? player.name : "Steve"
         }/face${
@@ -22,7 +31,10 @@ const Player = ({ player }: Props) => {
         className="rounded-md"
       />
       <span
-        className={classNames("font-black", { "text-accent": player.plus })}
+        className={classNames("font-black", {
+          "text-accent": player.plus,
+          hidden: noNick,
+        })}
       >
         {player.name}
       </span>

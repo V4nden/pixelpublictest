@@ -1,19 +1,37 @@
 "use client";
+import Player from "@/src/entities/Player/ui/Player";
 import PlayerNav from "@/src/entities/Player/ui/PlayerNav";
 import PlayerNavSkeleton from "@/src/entities/Player/ui/PlayerNav.skeleton";
+import { IThread } from "@/src/entities/Thread/model/types";
+import NavBarNestedItem from "@/src/features/NavBarNestedItem/NavBarNestedItem";
+import dateISOToNormal from "@/src/shared/utils/dateISOtoNormal";
 import { signIn, signOut, useSession } from "next-auth/react";
 import Image from "next/image";
 import Link from "next/link";
 import React, { useEffect, useState } from "react";
-import { FaHome, FaNewspaper, FaUserTie } from "react-icons/fa";
-import { FaNoteSticky, FaPeopleGroup, FaWebflow } from "react-icons/fa6";
+import {
+  FaCodeBranch,
+  FaHome,
+  FaNewspaper,
+  FaPage4,
+  FaTicketAlt,
+  FaUserTie,
+} from "react-icons/fa";
+import {
+  FaNoteSticky,
+  FaPeopleGroup,
+  FaThreads,
+  FaWebflow,
+} from "react-icons/fa6";
+import Markdown from "react-markdown";
 
-type Props = {};
+type Props = { userThreads?: IThread[] };
 
-const NavBar = (props: Props) => {
+const NavBar = ({ userThreads }: Props) => {
   const session = useSession();
   const [scroll, setScroll] = useState(0);
   useEffect(() => {
+    setScroll(window.scrollY);
     window.addEventListener("scroll", (e) => {
       setScroll(window.scrollY);
     });
@@ -35,27 +53,113 @@ const NavBar = (props: Props) => {
             Beta
           </p>
         </Link>
-        <div className="md:text-sm sm:text-base flex gap-6 font-semibold justify-center">
-          <Link href={"/"} className="flex gap-2 items-center">
+        <div className="md:text-sm sm:text-base flex gap-2 font-semibold justify-center">
+          <Link
+            href={"/"}
+            className="flex gap-2 p-2 items-center justify-start"
+          >
             <FaHome /> <p className="sm:hidden lg:block">Главная</p>
           </Link>
-          <Link href={"/wiki"} className="flex gap-2 items-center">
+          <Link
+            href={"/wiki"}
+            className="flex gap-2 p-2 items-center justify-start"
+          >
             <FaNoteSticky /> <p className="sm:hidden lg:block">Вики</p>
           </Link>
-          <Link href={"/news"} className="flex gap-2 items-center">
+          <Link
+            href={"/news"}
+            className="flex gap-2 p-2 items-center justify-start"
+          >
             <FaNewspaper /> <p className="sm:hidden lg:block">Новости</p>
           </Link>
           {/* <Link href={"/dev"} className="flex gap-2 items-center text-text/50">
             <FaPeopleGroup /> <p className="sm:hidden lg:block">Игроки</p>
           </Link> */}
-          <Link
-            href={"https://t.me/connectsomnoi"}
-            className="flex gap-2 items-center"
-          >
-            <FaUserTie /> <p className="sm:hidden lg:block">Поддержка</p>
-          </Link>
+
+          {session.data?.user.player ? (
+            <div className="flex gap-2 items-center justify-start relative p-2 group/players cursor-pointer">
+              <FaPeopleGroup /> <p className="sm:hidden lg:block">Игрокам</p>
+              <div className="absolute grid lg:grid-cols-2 md:grld-cols-1 gap-4 invisible opacity-0 group-hover/players:opacity-100 group-hover/players:visible top-full left-1/2 -translate-x-1/2 active border p-4 w-max transition-all">
+                <div className="flex flex-col gap-4">
+                  <NavBarNestedItem
+                    to="/threads"
+                    title="Треды"
+                    description="Треды игроков сервера"
+                    icon={FaCodeBranch}
+                  />
+                  <hr className="border-primary/25" />
+                  <NavBarNestedItem
+                    to="/tickets"
+                    title="Тикеты"
+                    description="Взаимодействие с администрацией"
+                    icon={FaTicketAlt}
+                  />
+                  <hr className="border-primary/25" />
+                  <NavBarNestedItem
+                    to="https://t.me/connectsomnoi"
+                    title="Поддержка"
+                    description="По всем вопросам сюда"
+                    icon={FaUserTie}
+                  />
+                </div>
+                {userThreads && (
+                  <div className="flex flex-col h-full justify-between gap-2 overflow-y-hidden">
+                    {userThreads.map((thread) => {
+                      return (
+                        <Link
+                          key={thread.id}
+                          href={"/threads/" + thread.id}
+                          className="flex flex-col gap-1 p-2 active border hover:drop-shadow-glow transition-all duration-1000"
+                        >
+                          <div className="flex gap-2 justify-between">
+                            <div className="flex gap-2 items-center">
+                              <h3>{thread.name}</h3>
+                              <span className="text-[10px] text-text/25">
+                                {dateISOToNormal(thread.updated)}
+                              </span>
+                            </div>
+                            {thread.expand?.creator && (
+                              <Player
+                                size="small"
+                                noNick
+                                player={thread.expand?.creator}
+                              />
+                            )}
+                          </div>
+                          {thread.expand?.recentMessage &&
+                            (() => {
+                              let messageCut =
+                                thread.expand?.recentMessage.content
+                                  .split("\n")[0]
+                                  .slice(0, 30);
+
+                              if (messageCut.length == 30) {
+                                messageCut += "...";
+                              }
+
+                              return (
+                                <p className="text-xs text-text/50">
+                                  <Markdown>{messageCut}</Markdown>
+                                </p>
+                              );
+                            })()}
+                        </Link>
+                      );
+                    })}
+                  </div>
+                )}
+              </div>
+            </div>
+          ) : (
+            <Link
+              href={"https://t.me/connectsomnoi"}
+              className="flex gap-2 items-center"
+            >
+              <FaUserTie /> <p className="sm:hidden lg:block">Поддержка</p>
+            </Link>
+          )}
         </div>
-        <div className="place-self-end">
+        <div className="place-self-end h-full flex items-center">
           {session.status == "loading" ? (
             <PlayerNavSkeleton />
           ) : session.status == "authenticated" ? (

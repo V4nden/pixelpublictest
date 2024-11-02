@@ -1,5 +1,5 @@
 import { IMessage, IThread } from "@/src/entities/Thread/model/types";
-import moment from "moment";
+import dateISOToNormal from "@/src/shared/utils/dateISOtoNormal";
 import React from "react";
 
 type Props = { thread: IThread; messages: IMessage[] };
@@ -11,9 +11,7 @@ const ThreadHeader = ({ thread, messages }: Props) => {
       <span>
         От {thread.expand?.creator && thread.expand?.creator.name}, сообщений:{" "}
         {messages.length}, последнее в{" "}
-        {moment(messages[messages.length - 1].created).format(
-          "HH:mm, DD.MM.yyyy"
-        )}
+        {dateISOToNormal(messages[messages.length - 1].created)}
       </span>
     </div>
   );

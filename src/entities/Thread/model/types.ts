@@ -5,29 +5,22 @@ export interface IThread extends IPBDefault {
   name: string;
   creator: string;
   allowed: string[];
-  recentMessage: {
-    attachments: string[];
-    author: string;
-    collectionId: string;
-    collectionName: string;
-    content: string;
-    created: string;
-    id: string;
-    thread: string;
-    updated: string;
-  };
   participants: string[];
+  recentMessage: string;
+  private: boolean;
   expand?: {
     creator?: IPlayer;
     allowed?: IPlayer[];
     participants: IPlayer[];
+    recentMessage: IMessage;
   };
 }
 
 export enum IThreadExpandable {
   CREATOR = "creator",
-  ALLOWED = "allowrd",
+  ALLOWED = "allowed",
   PARTICIPANTS = "participants",
+  RECENT_MESSAGE = "recentMessage",
 }
 
 export interface IMessage extends IPBDefault {
