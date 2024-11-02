@@ -20,7 +20,7 @@ export enum IThreadExpandable {
   CREATOR = "creator",
   ALLOWED = "allowed",
   PARTICIPANTS = "participants",
-  RECENT_MESSAGE = "recentMessage",
+  RECENT_MESSAGE = "recentMessage.author",
 }
 
 export interface IMessage extends IPBDefault {

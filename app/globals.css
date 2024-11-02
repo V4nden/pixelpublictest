@@ -55,17 +55,17 @@ ul {
 }
 
 .active {
-  @apply bg-background/25 backdrop-blur-sm border-primary/25 rounded-lg;
+  @apply bg-background/50 backdrop-blur-sm border-primary/25 rounded-lg;
 }
 .hover-active {
-  @apply hover:bg-background/25 hover:backdrop-blur-sm hover:border-primary/25 border-primary/0 rounded-lg;
+  @apply hover:bg-background/50 hover:backdrop-blur-sm hover:border-primary/25 border-primary/0 rounded-lg;
 }
 
 .active-no-rounded {
-  @apply bg-background/25 backdrop-blur-sm border-primary/25;
+  @apply bg-background/50 backdrop-blur-sm border-primary/25;
 }
 .hover-active-no-rounded {
-  @apply hover:bg-background/25 hover:backdrop-blur-sm hover:border-primary/25 border-primary/0;
+  @apply hover:bg-background/50 hover:backdrop-blur-sm hover:border-primary/25 border-primary/0;
 }
 
 @keyframes rotating {
