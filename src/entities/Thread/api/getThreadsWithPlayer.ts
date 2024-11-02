@@ -8,6 +8,7 @@ export default async function getThreadsWithPlayer(
 ): Promise<IThread[]> {
   return await pb.collection("threads").getFullList({
     filter: `participants.id?~"${player.id}"||creator.id="${player.id}"`,
+    sort: "-updated",
     headers: { key: String(process.env.POCKETBASE_KEY) },
     expand: expand && expand.join(","),
   });

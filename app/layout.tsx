@@ -8,6 +8,10 @@ import { ToastContainer } from "react-toastify";
 import ToastProvider from "@/src/shared/ui/Toasts/ToastProvider";
 import Footer from "@/src/widgets/Footer/ui/Footer";
 import localFont from "next/font/local";
+import getThreadsWithPlayer from "@/src/entities/Thread/api/getThreadsWithPlayer";
+import { getServerSession } from "next-auth";
+import { nextAuthOptions } from "@/src/app/auth/model/nextAuthOptions";
+import { IThread, IThreadExpandable } from "@/src/entities/Thread/model/types";
 const inter = Inter({ subsets: ["cyrillic"], weight: "400" });
 
 export const metadata: Metadata = {
@@ -15,11 +19,21 @@ export const metadata: Metadata = {
   description: "Лучший ванильный сервер",
 };
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const session = await getServerSession(nextAuthOptions);
+
+  const userThreads: IThread[] | undefined =
+    session &&
+    session.user.player &&
+    (await getThreadsWithPlayer(session.user.player, [
+      IThreadExpandable.RECENT_MESSAGE,
+      IThreadExpandable.CREATOR,
+    ]));
+
   return (
     <html lang="en">
       <head>
@@ -28,7 +42,7 @@ export default function RootLayout({
       <body className={inter.className}>
         <AuthProvider>
           <ToastProvider>
-            <NavBar />
+            <NavBar userThreads={userThreads?.slice(0, 3)} />
             {children}
             <Footer />
           </ToastProvider>
@@ -37,3 +51,5 @@ export default function RootLayout({
     </html>
   );
 }
+
+export const revalidate = 0;
