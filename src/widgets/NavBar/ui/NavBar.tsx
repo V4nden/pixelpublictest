@@ -3,6 +3,7 @@ import Player from "@/src/entities/Player/ui/Player";
 import PlayerNav from "@/src/entities/Player/ui/PlayerNav";
 import PlayerNavSkeleton from "@/src/entities/Player/ui/PlayerNav.skeleton";
 import { IThread } from "@/src/entities/Thread/model/types";
+import ThreadPreview from "@/src/entities/Thread/ui/ThreadPreview";
 import NavigationItem from "@/src/features/NavigationItem/NavigationItem";
 import dateISOToNormal from "@/src/shared/utils/dateISOtoNormal";
 import classNames from "classnames";
@@ -26,9 +27,9 @@ import {
 } from "react-icons/fa6";
 import Markdown from "react-markdown";
 
-type Props = { userThreads?: IThread[] };
+type Props = { lastThread?: IThread };
 
-const NavBar = ({ userThreads }: Props) => {
+const NavBar = ({ lastThread }: Props) => {
   const session = useSession();
   const [scroll, setScroll] = useState(0);
   useEffect(() => {
@@ -81,75 +82,30 @@ const NavBar = ({ userThreads }: Props) => {
           {session.data?.user.player ? (
             <div className="flex gap-2 items-center justify-start relative p-2 group/players cursor-pointer">
               <FaPeopleGroup /> <p className="sm:hidden lg:block">Игрокам</p>
-              <div className="absolute grid lg:grid-cols-2 md:grld-cols-1 gap-4 invisible opacity-0 group-hover/players:opacity-100 group-hover/players:visible top-full left-1/2 -translate-x-1/2 active border p-4 w-max transition-all">
-                <div className="flex flex-col gap-4">
-                  <NavigationItem
-                    to="/threads"
-                    title="Треды"
-                    description="Треды игроков сервера"
-                    icon={FaCodeBranch}
-                  />
-                  <hr className="border-primary/25" />
-                  <NavigationItem
-                    to="/tickets"
-                    title="Тикеты"
-                    description="Взаимодействие с администрацией"
-                    icon={FaTicketAlt}
-                  />
-                  <hr className="border-primary/25" />
-                  <NavigationItem
-                    to="https://t.me/connectsomnoi"
-                    title="Поддержка"
-                    description="По всем вопросам сюда"
-                    icon={FaUserTie}
-                  />
+              <div className="absolute flex flex-col gap-4 invisible opacity-0 group-hover/players:opacity-100 group-hover/players:visible top-full left-1/2 -translate-x-1/2 active border p-4 w-max transition-all">
+                <NavigationItem
+                  to="/threads"
+                  title="Треды"
+                  description="Треды игроков сервера"
+                  icon={FaCodeBranch}
+                />
+                <hr className="border-primary/25" />
+                <NavigationItem
+                  to="/tickets"
+                  title="Тикеты"
+                  description="Взаимодействие с администрацией"
+                  icon={FaTicketAlt}
+                />
+                <hr className="border-primary/25" />
+                <NavigationItem
+                  to="https://t.me/connectsomnoi"
+                  title="Поддержка"
+                  description="По всем вопросам сюда"
+                  icon={FaUserTie}
+                />
+                <div>
+                  {lastThread && <ThreadPreview small thread={lastThread} />}
                 </div>
-                {userThreads && (
-                  <div className="flex flex-col h-full justify-between gap-2 overflow-y-hidden">
-                    {userThreads.map((thread) => {
-                      return (
-                        <Link
-                          key={thread.id}
-                          href={"/threads/" + thread.id}
-                          className="flex flex-col gap-1 p-2 active border hover:drop-shadow-glow transition-all duration-1000"
-                        >
-                          <div className="flex gap-2 justify-between">
-                            <div className="flex gap-2 items-center">
-                              <h3>{thread.name}</h3>
-                              <span className="text-[10px] text-text/25">
-                                {dateISOToNormal(thread.updated)}
-                              </span>
-                            </div>
-                            {thread.expand?.creator && (
-                              <Player
-                                size="small"
-                                noNick
-                                player={thread.expand?.creator}
-                              />
-                            )}
-                          </div>
-                          {thread.expand?.recentMessage &&
-                            (() => {
-                              let messageCut =
-                                thread.expand?.recentMessage.content
-                                  .split("\n")[0]
-                                  .slice(0, 30);
-
-                              if (messageCut.length == 30) {
-                                messageCut += "...";
-                              }
-
-                              return (
-                                <p className="text-xs text-text/50">
-                                  <Markdown>{messageCut}</Markdown>
-                                </p>
-                              );
-                            })()}
-                        </Link>
-                      );
-                    })}
-                  </div>
-                )}
               </div>
             </div>
           ) : (

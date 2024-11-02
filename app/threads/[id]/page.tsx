@@ -37,6 +37,7 @@ export async function generateMetadata(
   const thread = await cachedGetThreadById(params.id, [
     IThreadExpandable.RECENT_MESSAGE,
     IThreadExpandable.ALLOWED,
+    IThreadExpandable.CREATOR,
   ]);
   if (!thread)
     return {
@@ -60,6 +61,7 @@ const Thread = async ({ params }: Props) => {
   const thread = await cachedGetThreadById(params.id, [
     IThreadExpandable.RECENT_MESSAGE,
     IThreadExpandable.ALLOWED,
+    IThreadExpandable.CREATOR,
   ]);
   if (!thread) return redirect("/not-found", RedirectType.replace);
 

@@ -2,6 +2,7 @@
 import Player from "@/src/entities/Player/ui/Player";
 import PlayerNav from "@/src/entities/Player/ui/PlayerNav";
 import { IThread } from "@/src/entities/Thread/model/types";
+import ThreadPreview from "@/src/entities/Thread/ui/ThreadPreview";
 import NavigationItem from "@/src/features/NavigationItem/NavigationItem";
 import dateISOToNormal from "@/src/shared/utils/dateISOtoNormal";
 import { signIn, useSession } from "next-auth/react";
@@ -19,9 +20,9 @@ import {
 } from "react-icons/fa";
 import Markdown from "react-markdown";
 
-type Props = { userThreads?: IThread[] };
+type Props = { lastThread?: IThread };
 
-const Sidebar = ({ userThreads }: Props) => {
+const Sidebar = ({ lastThread }: Props) => {
   const [opened, setOpened] = useState(false);
 
   const session = useSession();
@@ -108,57 +109,15 @@ const Sidebar = ({ userThreads }: Props) => {
               description="Треды игроков сервера"
               icon={FaCodeBranch}
             />
-            {userThreads && (
-              <div className="flex flex-col h-full justify-between gap-2 overflow-y-hidden">
-                {userThreads.map((thread) => {
-                  return (
-                    <Link
-                      key={"sidebar" + thread.id}
-                      href={"/threads/" + thread.id}
-                      className="flex flex-col gap-1 p-2 active border hover:drop-shadow-glow transition-all duration-1000"
-                    >
-                      <div className="flex gap-2 justify-between">
-                        <div className="flex gap-2 items-center flex-wrap">
-                          <h3>{thread.name}</h3>
-                          <span className="text-[10px] text-text/25">
-                            {dateISOToNormal(thread.updated)}
-                          </span>
-                        </div>
-                        {thread.expand?.creator && (
-                          <Player
-                            size="small"
-                            noNick
-                            player={thread.expand?.creator}
-                          />
-                        )}
-                      </div>
-                      {thread.expand?.recentMessage &&
-                        (() => {
-                          let messageCut = thread.expand?.recentMessage.content
-                            .split("\n")[0]
-                            .slice(0, 30);
-
-                          if (messageCut.length == 30) {
-                            messageCut += "...";
-                          }
-
-                          return (
-                            <p className="text-xs text-text/50">
-                              <Markdown>{messageCut}</Markdown>
-                            </p>
-                          );
-                        })()}
-                    </Link>
-                  );
-                })}
-              </div>
-            )}
           </>
         )}
 
         <div className="flex-grow flex gap-4 flex-col justify-end">
+          {session?.data?.user.player && lastThread && (
+            <ThreadPreview thread={lastThread} />
+          )}
           <hr className="border-primary/25" />
-          <div className="flex items-center p-2 active border">
+          <div className="flex items-center p-2">
             {session && session.data ? (
               <PlayerNav session={session.data} />
             ) : (

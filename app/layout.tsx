@@ -24,7 +24,7 @@ export default async function RootLayout({
 }>) {
   const session = await getServerSession(nextAuthOptions);
 
-  const userThreads: IThread[] | undefined =
+  const lastThread: IThread | undefined =
     session &&
     session.user.player &&
     (
@@ -32,7 +32,7 @@ export default async function RootLayout({
         IThreadExpandable.RECENT_MESSAGE,
         IThreadExpandable.CREATOR,
       ])
-    ).slice(0, 3);
+    )[0];
 
   return (
     <html lang="en">
@@ -42,8 +42,8 @@ export default async function RootLayout({
       <body className={inter.className}>
         <AuthProvider>
           <ToastProvider>
-            <NavBar userThreads={userThreads} />
-            <Sidebar userThreads={userThreads} />
+            <NavBar lastThread={lastThread} />
+            <Sidebar lastThread={lastThread} />
             {children}
             <Footer />
           </ToastProvider>
