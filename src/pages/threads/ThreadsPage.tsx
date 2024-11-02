@@ -24,9 +24,11 @@ const ThreadsPage = ({ threads }: Props) => {
             href={"/threads/" + thread.id}
             className="flex flex-col gap-2 p-4 active border transition-all hover:drop-shadow-glow duration-1000 ease-out"
           >
-            <div className="flex items-center gap-2">
-              <h1 className="text-2xl font-black">{thread.name}</h1>
-              <div className="flex gap-2 items-center text-text/50">
+            <div className="flex flex-wrap items-center gap-2">
+              <h1 className="md:text-2xl sm:text-base font-black">
+                {thread.name}
+              </h1>
+              <div className="flex gap-2 items-center md:text-base sm:text-xs text-text/50">
                 <span>От</span>
                 {thread.expand?.creator && (
                   <Player player={thread.expand?.creator} />

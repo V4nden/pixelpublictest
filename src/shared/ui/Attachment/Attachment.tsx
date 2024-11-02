@@ -21,7 +21,7 @@ const Attachment = (props: Props) => {
       >
         <img
           src={`/api/attachment/${props.collection}/${props.record}/${props.file}`}
-          className="w-full rounded-md"
+          className="rounded-lg h-full w-full object-contain"
           alt="image file preview"
         />
       </Popup>

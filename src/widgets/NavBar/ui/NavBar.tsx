@@ -79,7 +79,11 @@ const NavBar = ({ userThreads }: Props) => {
           {session.data?.user.player ? (
             <div className="flex gap-2 items-center justify-start relative p-2 group/players cursor-pointer">
               <FaPeopleGroup /> <p className="sm:hidden lg:block">Игрокам</p>
-              <div className="absolute grid lg:grid-cols-2 md:grld-cols-1 gap-4 invisible opacity-0 group-hover/players:opacity-100 group-hover/players:visible top-full left-1/2 -translate-x-1/2 active border p-4 w-max transition-all">
+              <div
+                className={`absolute grid ${
+                  userThreads && "lg:grid-cols-2 md:grld-cols-1"
+                } gap-4 invisible opacity-0 group-hover/players:opacity-100 group-hover/players:visible top-full left-1/2 -translate-x-1/2 active border p-4 w-max transition-all`}
+              >
                 <div className="flex flex-col gap-4">
                   <NavBarNestedItem
                     to="/threads"
