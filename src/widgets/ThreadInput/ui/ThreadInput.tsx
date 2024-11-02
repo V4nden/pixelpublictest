@@ -1,7 +1,13 @@
 "use client";
 import { IMessage, IThread } from "@/src/entities/Thread/model/types";
 import classNames from "classnames";
-import { ClipboardEvent, KeyboardEvent, useRef, useState } from "react";
+import {
+  ChangeEvent,
+  ClipboardEvent,
+  KeyboardEvent,
+  useRef,
+  useState,
+} from "react";
 import { FieldErrors, useForm } from "react-hook-form";
 import { FaFile } from "react-icons/fa";
 import { FaX } from "react-icons/fa6";
@@ -16,6 +22,7 @@ type Props = {
 
 const ThreadInput = ({ thread, updateMessages }: Props) => {
   const [loading, setLoading] = useState(false);
+
   const [errorsPreview, setErrorsPreview] = useState<FieldErrors<{
     content: string;
     attachments: File[];
@@ -28,6 +35,11 @@ const ThreadInput = ({ thread, updateMessages }: Props) => {
     resolver: yupResolver(messageValidationSchema),
     defaultValues: { attachments: [], content: "" },
   });
+
+  const changeHeightBasedOfLines = (e: ChangeEvent<HTMLTextAreaElement>) => {
+    e.currentTarget.style.height =
+      e.currentTarget.value.split("\n").length * 24 + "px";
+  };
 
   const onSubmit = (data: { content: string; attachments: File[] }) => {
     if (loading) return;
@@ -145,8 +157,10 @@ const ThreadInput = ({ thread, updateMessages }: Props) => {
         onPaste={handlePaste}
         onKeyDown={submitOnEnter}
         disabled={loading}
-        {...register("content")}
-        className="outline-none bg-text/0 w-full"
+        {...register("content", {
+          onChange: changeHeightBasedOfLines,
+        })}
+        className="outline-none bg-text/0 w-full resize-none leading-[24px] h-[24px]"
       />
       {errorsPreview && (
         <div className="text-accent flex flex-col gap-2">
