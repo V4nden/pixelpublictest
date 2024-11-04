@@ -1,4 +1,5 @@
 import { pb } from "@/src/app/pocketbase";
+import Footer from "@/src/widgets/Footer/ui/Footer";
 import HomePageStatsWidget from "@/src/widgets/HomePageStatsWidget";
 import Image from "next/image";
 import Link from "next/link";
@@ -62,6 +63,7 @@ export default async function Home() {
           }
         />
       </div>
+      <Footer />
     </main>
   );
 }

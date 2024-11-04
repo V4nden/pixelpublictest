@@ -44,8 +44,7 @@ export default async function RootLayout({
           <ToastProvider>
             <NavBar lastThread={lastThread} />
             <Sidebar lastThread={lastThread} />
-            {children}
-            <Footer />
+            {children}=
           </ToastProvider>
         </AuthProvider>
       </body>
