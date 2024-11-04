@@ -18,7 +18,7 @@ const ThreadHeader = ({ thread, messages, hideAuthorNick, small }: Props) => {
           small ? "text-base" : "md:text-xl sm:text-base"
         } text-primary`}
       >
-        {thread.name}
+        {thread.title}
       </h1>
       <span className={small ? "text-xs" : "sm:text-xs md:text-base"}>
         От {dateISOToNormal(thread.created)}

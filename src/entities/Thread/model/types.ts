@@ -2,7 +2,7 @@ import { IPBDefault } from "@/src/app/pocketbase";
 import { IPlayer } from "../../Player/model/types";
 
 export interface IThread extends IPBDefault {
-  name: string;
+  title: string;
   creator: string;
   allowed: string[];
   participants: string[];

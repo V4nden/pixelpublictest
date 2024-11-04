@@ -1,4 +1,4 @@
-export default function formDataToJson(formData: FormData) {
+export default function formDataToJson<T>(formData: FormData) {
   return Array.from(formData.keys()).reduce<Record<string, string | string[]>>(
     (acc, key) => {
       const cleanKey = key.replace("[]", "");

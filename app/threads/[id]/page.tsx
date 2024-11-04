@@ -45,7 +45,7 @@ export async function generateMetadata(
     };
 
   return {
-    title: "Pixel - Ветка - " + thread.name,
+    title: "Pixel - Ветка - " + thread.title,
     description: thread.expand?.recentMessage
       ? thread.expand?.recentMessage.content
       : "Ветка создана",
