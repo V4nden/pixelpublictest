@@ -86,7 +86,9 @@ const ThreadMessage = ({ message, small }: Props) => {
             }
           },
         }}
-        className={classNames("markdown", { "text-xs": small })}
+        className={classNames("markdown whitespace-pre-wrap", {
+          "text-xs": small,
+        })}
       >
         {message.content}
       </Markdown>
