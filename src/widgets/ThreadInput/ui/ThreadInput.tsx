@@ -41,6 +41,12 @@ const ThreadInput = ({ thread, updateMessages }: Props) => {
       e.currentTarget.value.split("\n").length * 24 + "px";
   };
 
+  const textAreaRef = useRef<HTMLTextAreaElement | null>(null);
+
+  const { ref: textAreaFormRef, ...contentRegisterRest } = register("content", {
+    onChange: changeHeightBasedOfLines,
+  });
+
   const onSubmit = (data: { content: string; attachments: File[] }) => {
     if (loading) return;
 
@@ -65,6 +71,9 @@ const ThreadInput = ({ thread, updateMessages }: Props) => {
 
       setValue("attachments", []);
       setValue("content", "");
+      if (textAreaRef.current) {
+        textAreaRef.current.style.height = "24px";
+      }
     });
   };
 
@@ -153,13 +162,16 @@ const ThreadInput = ({ thread, updateMessages }: Props) => {
         })}
       </div>
       <textarea
+        id="threadTextArea"
         readOnly={loading}
         onPaste={handlePaste}
         onKeyDown={submitOnEnter}
         disabled={loading}
-        {...register("content", {
-          onChange: changeHeightBasedOfLines,
-        })}
+        {...contentRegisterRest}
+        ref={(e) => {
+          textAreaFormRef(e);
+          textAreaRef.current = e;
+        }}
         className="outline-none bg-text/0 w-full resize-none leading-[24px] h-[24px]"
       />
       {errorsPreview && (
