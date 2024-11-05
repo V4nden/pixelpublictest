@@ -87,7 +87,7 @@ const ThreadMessage = ({ message, small }: Props) => {
           },
         }}
         className={classNames(
-          "markdown whitespace-pre-wrap break-words overflow-scroll",
+          "markdown whitespace-pre-wrap break-words overflow-x-scroll scrollbar-hide",
           {
             "text-xs": small,
           }

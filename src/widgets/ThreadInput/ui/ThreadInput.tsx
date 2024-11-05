@@ -5,11 +5,12 @@ import {
   ChangeEvent,
   ClipboardEvent,
   KeyboardEvent,
+  MouseEvent,
   useRef,
   useState,
 } from "react";
 import { FieldErrors, useForm } from "react-hook-form";
-import { FaFile } from "react-icons/fa";
+import { FaFile, FaLink } from "react-icons/fa";
 import { FaX } from "react-icons/fa6";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { messageValidationSchema } from "@/src/entities/Thread/model/messageValidationSchema";
@@ -46,6 +47,21 @@ const ThreadInput = ({ thread, updateMessages }: Props) => {
   const { ref: textAreaFormRef, ...contentRegisterRest } = register("content", {
     onChange: changeHeightBasedOfLines,
   });
+
+  const fileInputRef = useRef<HTMLInputElement>(null);
+
+  const handleFileInputChange = (e: ChangeEvent<HTMLInputElement>) => {
+    if (loading) return;
+
+    if (!e.currentTarget.files || !e.currentTarget.files[0]) return;
+
+    setValue("attachments", [
+      ...watch("attachments"),
+      e.currentTarget.files[0],
+    ]);
+
+    e.currentTarget.value = "";
+  };
 
   const onSubmit = (data: { content: string; attachments: File[] }) => {
     if (loading) return;
@@ -86,7 +102,7 @@ const ThreadInput = ({ thread, updateMessages }: Props) => {
     }
   };
 
-  const handlePaste = (e: ClipboardEvent<HTMLTextAreaElement>) => {
+  const handleTextAreaPaste = (e: ClipboardEvent<HTMLTextAreaElement>) => {
     e.clipboardData.files.length && e.preventDefault();
 
     if (loading) return;
@@ -109,6 +125,12 @@ const ThreadInput = ({ thread, updateMessages }: Props) => {
 
   const fileSizeInMb = (file: File) =>
     Math.floor((file.size / 1024 / 1024) * 100) / 100;
+
+  const openFilePickerOnClick = (e: MouseEvent) => {
+    e.stopPropagation();
+    e.preventDefault();
+    fileInputRef.current?.click();
+  };
 
   return (
     <form
@@ -164,7 +186,7 @@ const ThreadInput = ({ thread, updateMessages }: Props) => {
       <textarea
         id="threadTextArea"
         readOnly={loading}
-        onPaste={handlePaste}
+        onPaste={handleTextAreaPaste}
         onKeyDown={submitOnEnter}
         disabled={loading}
         {...contentRegisterRest}
@@ -197,12 +219,26 @@ const ThreadInput = ({ thread, updateMessages }: Props) => {
             отправки
           </div>
         </div>
-        <input
-          ref={submitInputRef}
-          type="submit"
-          value="Отправить"
-          className="px-4 py-2 active border sm:w-full lg:w-fit"
-        />
+        <div className="flex sm:w-full lg:w-fit items-center gap-2">
+          <input
+            ref={fileInputRef}
+            type="file"
+            className="hidden"
+            onChange={handleFileInputChange}
+          />
+          <button
+            onClick={openFilePickerOnClick}
+            className="md:p-3 lg:p-2 md:text-base lg:text-xs text-text/50 active-no-rounded rounded-md border"
+          >
+            <FaLink />
+          </button>
+          <input
+            ref={submitInputRef}
+            type="submit"
+            value="Отправить"
+            className="px-4 py-2 active border w-full"
+          />
+        </div>
       </div>
     </form>
   );
