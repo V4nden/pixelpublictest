@@ -9,6 +9,7 @@ export async function POST(req: Request) {
       process.env.ADMIN_MAILS?.split(" ").includes(String(session.user.email))
     ) {
       const data = {
+        content: "||<@&1055112639245713408>||",
         embeds: [
           {
             title: "",
