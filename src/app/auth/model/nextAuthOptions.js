@@ -46,6 +46,7 @@ export const nextAuthOptions = {
     async jwt({ token, user, account, profile, isNewUser }) {
       if (account) {
         token.player = (await getPlayersByDID(user.id))[0];
+        token.did = user.id;
         token.reloged = 1730884766376;
       }
       return token;
@@ -53,6 +54,7 @@ export const nextAuthOptions = {
     async session({ session, token }) {
       if (token.reloged == 1730884766376) {
         session.user.player = token.player;
+        session.user.did = token.did;
         return session;
       } else {
         return null;
