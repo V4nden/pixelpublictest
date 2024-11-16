@@ -15,6 +15,11 @@ import Link from "next/link";
 type Props = {};
 
 const TicketPlayPage = (props: Props) => {
+  useEffect(() => {
+    console.log(session.data);
+    return () => {};
+  }, []);
+
   const {
     register,
     handleSubmit,
@@ -37,7 +42,7 @@ const TicketPlayPage = (props: Props) => {
       method: "POST",
       headers: { "Content-type": "application/json" },
       //@ts-ignore
-      body: JSON.stringify({ ...data, id: session.data.id }),
+      body: JSON.stringify({ ...data, id: session.data.user.did }),
     }).then(async (res) => {
       const resb = await res.json();
       if (resb.error) {
