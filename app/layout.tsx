@@ -9,7 +9,7 @@ import getThreadsWithPlayer from "@/src/entities/Thread/api/getThreadsWithPlayer
 import { getServerSession } from "next-auth";
 import { nextAuthOptions } from "@/src/app/auth/model/nextAuthOptions";
 import { IThread, IThreadExpandable } from "@/src/entities/Thread/model/types";
-import Sidebar from "@/src/widgets/Sidebar/Sidebar";
+import Sidebar from "@/src/widgets/Sidebar/ui/Sidebar";
 const inter = Inter({ subsets: ["cyrillic"], weight: "400" });
 
 export const metadata: Metadata = {

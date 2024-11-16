@@ -1,5 +1,4 @@
 "use client";
-import Player from "@/src/entities/Player/ui/Player";
 import PlayerNav from "@/src/entities/Player/ui/PlayerNav";
 import { IThread } from "@/src/entities/Thread/model/types";
 import ThreadPreview from "@/src/entities/Thread/ui/ThreadPreview";
@@ -18,7 +17,6 @@ import {
   FaTicketAlt,
   FaUserTie,
 } from "react-icons/fa";
-import Markdown from "react-markdown";
 
 type Props = { lastThread?: IThread };
 
@@ -29,8 +27,18 @@ const Sidebar = ({ lastThread }: Props) => {
 
   const pathname = usePathname();
 
+  const switchOpened = (to?: boolean) => {
+    const newOpened = to === undefined ? !opened : to;
+    setOpened(newOpened);
+    if (newOpened) {
+      document.body.style.overflowY = "hidden";
+    } else {
+      document.body.style.overflowY = "scroll";
+    }
+  };
+
   useEffect(() => {
-    setOpened(false);
+    switchOpened(false);
   }, [pathname]);
 
   return (
@@ -41,7 +49,7 @@ const Sidebar = ({ lastThread }: Props) => {
         <div className={`${opened ? "w-full" : "w-[0%]"} transition-all`}></div>
         <button
           onClick={() => {
-            setOpened(!opened);
+            switchOpened();
           }}
           className={`p-2 active border ${
             opened ? "rotate-0" : "rotate-180"
