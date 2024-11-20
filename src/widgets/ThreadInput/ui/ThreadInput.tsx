@@ -14,7 +14,7 @@ import { FaFile, FaLink } from "react-icons/fa";
 import { FaX } from "react-icons/fa6";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { messageValidationSchema } from "@/src/entities/Thread/model/messageValidationSchema";
-import Image from "next/image";
+import DynamicHeightTextArea from "@/src/features/DynamicHeightTextArea/DynamicHeightTextArea";
 
 type Props = {
   thread: IThread;
@@ -37,16 +37,7 @@ const ThreadInput = ({ thread, updateMessages }: Props) => {
     defaultValues: { attachments: [], content: "" },
   });
 
-  const changeHeightBasedOfLines = (e: ChangeEvent<HTMLTextAreaElement>) => {
-    e.currentTarget.style.height =
-      e.currentTarget.value.split("\n").length * 24 + "px";
-  };
-
   const textAreaRef = useRef<HTMLTextAreaElement | null>(null);
-
-  const { ref: textAreaFormRef, ...contentRegisterRest } = register("content", {
-    onChange: changeHeightBasedOfLines,
-  });
 
   const fileInputRef = useRef<HTMLInputElement>(null);
 
@@ -183,17 +174,13 @@ const ThreadInput = ({ thread, updateMessages }: Props) => {
           );
         })}
       </div>
-      <textarea
+      <DynamicHeightTextArea
         id="threadTextArea"
         readOnly={loading}
         onPaste={handleTextAreaPaste}
         onKeyDown={submitOnEnter}
         disabled={loading}
-        {...contentRegisterRest}
-        ref={(e) => {
-          textAreaFormRef(e);
-          textAreaRef.current = e;
-        }}
+        {...register("content")}
         className="outline-none bg-text/0 w-full resize-none leading-[24px] h-[24px]"
       />
       {errorsPreview && (

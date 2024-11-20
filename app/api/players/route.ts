@@ -1,5 +1,6 @@
 import { pb } from "@/src/app/pocketbase";
 import { getPlayerById } from "@/src/entities/Player/api/getPlayerById";
+import getPlayersAll from "@/src/entities/Player/api/getPlayersAll";
 import getPlayersByDID from "@/src/entities/Player/api/getPlayersByDID";
 import getPlayersByName from "@/src/entities/Player/api/getPlayersByName";
 import { getServerSession } from "next-auth";
@@ -23,5 +24,6 @@ export async function GET(req: NextRequest) {
     const [player] = await getPlayersByDID(did);
     return NextResponse.json(player);
   }
-  return NextResponse.json({ error: "No parameter specified" });
+  const players = await getPlayersAll();
+  return NextResponse.json(players);
 }

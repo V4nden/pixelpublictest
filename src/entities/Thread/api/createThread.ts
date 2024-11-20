@@ -5,12 +5,16 @@ import { IThread } from "../model/types";
 export default async function createThread(
   title: string,
   creator: IPlayer,
-  creationMessage?: string
+  creationMessage?: string,
+  isPrivate?: boolean,
+  allowed?: string[]
 ): Promise<IThread> {
   const threadRequest: IThread = await pb.collection("threads").create(
     {
       title,
       creator: creator.id,
+      private: isPrivate,
+      allowed: allowed,
     },
     { headers: { key: String(process.env.POCKETBASE_KEY) } }
   );

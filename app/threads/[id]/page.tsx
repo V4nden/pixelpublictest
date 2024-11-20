@@ -67,7 +67,10 @@ const Thread = async ({ params }: Props) => {
 
   if (
     thread.expand?.allowed &&
-    thread.expand?.allowed.find((player) => player.id != session.user.player.id)
+    thread.expand?.allowed.find(
+      (player) => player.id != session.user.player.id
+    ) &&
+    thread.creator != session.user.player.id
   ) {
     return redirect("/not-allowed", RedirectType.replace);
   }

@@ -6,7 +6,7 @@ import ThreadMessage from "@/src/widgets/ThreadMessage/ThreadMessage";
 
 type Props = { thread: IThread; small?: boolean };
 
-const ThreadPreview = ({ thread, small }: Props) => {
+const ThreadPreview = React.memo(({ thread, small }: Props) => {
   return (
     <Link
       key={thread.id}
@@ -31,6 +31,8 @@ const ThreadPreview = ({ thread, small }: Props) => {
       )}
     </Link>
   );
-};
+});
+
+ThreadPreview.displayName = "ThreadPreview";
 
 export default ThreadPreview;

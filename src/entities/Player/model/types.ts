@@ -12,4 +12,5 @@ export interface IPlayer {
   plus: boolean;
   discord: string;
   did: string;
+  banned: boolean;
 }

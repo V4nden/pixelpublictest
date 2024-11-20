@@ -29,6 +29,7 @@ const config: Config = {
       },
       dropShadow: {
         glow: ["0 0px 20px rgba(255,200, 100, 0.35)"],
+        glowsm: ["0 0px 5px rgba(255,200, 100, 0.25)"],
       },
     },
   },

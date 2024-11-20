@@ -1,35 +1,43 @@
 import { getPlayerById } from "@/src/entities/Player/api/getPlayerById";
 import Player from "@/src/entities/Player/ui/Player";
 import { IMessage } from "@/src/entities/Thread/model/types";
-import Attachment from "@/src/shared/ui/Attachment/Attachment";
+import Attachment from "@/src/features/Attachment/Attachment";
+
 import dateISOToNormal from "@/src/shared/utils/dateISOtoNormal";
 import classNames from "classnames";
-import React, { ReactNode } from "react";
+import React, { ReactNode, useCallback } from "react";
 import { FaAt } from "react-icons/fa";
 import Markdown from "react-markdown";
 
 type Props = { message: IMessage; small?: boolean };
 
 const ThreadMessage = ({ message, small }: Props) => {
-  const parseMentionsFromString = (text: string): Array<string | ReactNode> => {
-    const finalParagraph: Array<string | ReactNode> = [text];
+  const parseMentionsFromString = useCallback(
+    (text: string): Array<string | ReactNode> => {
+      const finalParagraph: Array<string | ReactNode> = [text];
 
-    for (const match of text.matchAll(/@(\w+!)(\s|)/gm)) {
-      const restText = finalParagraph[finalParagraph.length - 1];
+      for (const match of text.matchAll(/@(\w+!)(\s|)/gm)) {
+        const restText = finalParagraph[finalParagraph.length - 1];
 
-      if (!restText || typeof restText != "string") break;
+        if (!restText || typeof restText != "string") break;
 
-      finalParagraph.pop();
-      finalParagraph.push(restText.split(match[0])[0]);
+        finalParagraph.pop();
+        finalParagraph.push(restText.split(match[0])[0]);
+        const player = (
+          <Player
+            key={match[1].replace("!", "")}
+            player={match[1].replace("!", "")}
+          />
+        );
 
-      const player = <Player player={match[1].replace("!", "")} />;
+        finalParagraph.push(player);
+        finalParagraph.push(restText.split(match[0])[1]);
+      }
 
-      finalParagraph.push(player);
-      finalParagraph.push(restText.split(match[0])[1]);
-    }
-
-    return finalParagraph;
-  };
+      return finalParagraph;
+    },
+    [message]
+  );
 
   return (
     <div
@@ -60,7 +68,6 @@ const ThreadMessage = ({ message, small }: Props) => {
         components={{
           p(props) {
             const text: Array<ReactNode | string> | ReactNode = props.children;
-
             if (!text) return null;
 
             if (Array.isArray(text)) {
@@ -79,7 +86,11 @@ const ThreadMessage = ({ message, small }: Props) => {
               return (
                 <div className="flex flex-wrap gap-2">
                   {parseMentionsFromString(String(text)).map((el, index) =>
-                    typeof el == "string" ? <p key={index}>{el}</p> : el
+                    typeof el == "string" ? (
+                      <p key={index}>{el}</p>
+                    ) : (
+                      <span key={index}>{el}</span>
+                    )
                   )}
                 </div>
               );
@@ -98,5 +109,7 @@ const ThreadMessage = ({ message, small }: Props) => {
     </div>
   );
 };
+
+ThreadMessage.displayName = "ThreadMessage";
 
 export default ThreadMessage;

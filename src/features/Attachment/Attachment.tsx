@@ -1,8 +1,9 @@
 "use client";
 import { useState } from "react";
-import Popup from "../Popup/Popup";
+
 import { FaFile } from "react-icons/fa";
 import Image from "next/image";
+import Popup from "@/src/shared/ui/Popup/Popup";
 
 type Props = { record: string; collection: string; file: string };
 

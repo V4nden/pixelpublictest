@@ -15,11 +15,6 @@ import Link from "next/link";
 type Props = {};
 
 const TicketPlayPage = (props: Props) => {
-  useEffect(() => {
-    console.log(session.data);
-    return () => {};
-  }, []);
-
   const {
     register,
     handleSubmit,

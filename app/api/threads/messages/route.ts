@@ -48,7 +48,10 @@ export async function POST(req: NextRequest, res: NextResponse) {
 
   if (
     thread.expand?.allowed &&
-    thread.expand?.allowed.find((player) => player.id != session.user.player.id)
+    thread.expand?.allowed.find(
+      (player) => player.id != session.user.player.id
+    ) &&
+    thread.creator != session.user.player.id
   ) {
     return NextResponse.json({ error: "Not allowed" });
   }

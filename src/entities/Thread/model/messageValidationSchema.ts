@@ -16,7 +16,6 @@ export const messageValidationSchema = yup.object({
       if (!value) return true;
       for (const file of value) {
         if (file.size > 1024 * 1024 * 10) {
-          console.log(1024 * 1024 * 10, file.size);
           return false;
         }
       }

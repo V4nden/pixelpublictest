@@ -24,7 +24,6 @@ const ThreadsPage = ({ threads }: Props) => {
   }, [debounced]);
 
   if (!threads) return null;
-
   const searchForThreads = async () => {
     setLoading(true);
     fetch(

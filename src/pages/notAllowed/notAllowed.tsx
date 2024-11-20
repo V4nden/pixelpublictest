@@ -9,10 +9,6 @@ import { FaHome } from "react-icons/fa";
 type Props = {};
 
 const NotAllowedPage = (props: Props) => {
-  useEffect(() => {
-    console.log(1);
-  }, []);
-
   const text = useTextInputSimulation("not-allowed", 500);
   return (
     <main className="min-h-screen flex flex-col items-center justify-center gap-4 py-20">
